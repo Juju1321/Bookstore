@@ -1,0 +1,78 @@
+@import "src/assets/colors";
+@import "src/assets/mixins";
+
+.primaryButton {
+  @include button();
+  background-color: $primary;
+  color: $white;
+  padding: 18px 0;
+  &:hover {
+    background-color: $primary2;
+  }
+}
+
+.whiteButton {
+  @include button();
+  background-color: $white;
+  color: $secondary;
+  padding: 26px 0;
+  &:hover {
+    color: $primary;
+  }
+}
+
+.PrimaryIconButton {
+  @include buttonWithIcon();
+  background-color: $primary;
+  &:hover {
+    svg > path {
+      stroke: $red;
+    }
+  }
+}
+
+.WhiteIconButton {
+  @include buttonWithIcon();
+  background-color: $white;
+  &:hover {
+    svg > path {
+      fill: $red;
+    }
+  }
+}
+
+.disabledPrimaryButton {
+  background-color: $secondary;
+  &:hover {
+    cursor: not-allowed;
+    background-color: $secondary;
+    svg > path {
+      stroke: $white;
+    }
+  }
+}
+
+.disabledPrimaryIconButton {
+  background-color: $secondary;
+  &:hover {
+    cursor: not-allowed;
+    background-color: $secondary;
+    svg > path {
+      stroke: $white;
+    }
+  }
+}
+
+.disabledWhiteButton {
+  background-color: $white;
+  svg > path {
+    fill: $secondary;
+  }
+  &:hover {
+    background-color: $white;
+    cursor: not-allowed;
+    svg > path {
+      fill: $secondary;
+    }
+  }
+}
