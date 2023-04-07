@@ -1,9 +1,6 @@
 @import "src/assets/colors";
+@import "src/assets/mixins";
 
 .title {
-  color: $primary;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 56px;
-  line-height: 64px;
+  @include primaryHeadline();
 }
