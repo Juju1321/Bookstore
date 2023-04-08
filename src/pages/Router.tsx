@@ -1,21 +1,21 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PagesContainer from "src/pages/PagesContainer";
+import Main from "src/pages/Main";
 
 export enum RoutesList {
-    Home = "/",
-
+  Main = "/",
 }
 const Router = () => {
-    return (
-      <BrowserRouter>
-        <Routes>
-          <Route path={RoutesList.Home} element={<PagesContainer />}>
-
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path={RoutesList.Main} element={<PagesContainer />}>
+          <Route path={RoutesList.Main} element={<Main />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default Router;

@@ -23,9 +23,9 @@ export const CartIcon = ({
       <path
         d="M15 9C15 9.53043 14.6839 10.0391 14.1213 10.4142C13.5587 10.7893 12.7956 11 12 11C11.2044 11 10.4413 10.7893 9.87868 10.4142C9.31607 10.0391 9 9.53043 9 9"
         stroke="#313037"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
