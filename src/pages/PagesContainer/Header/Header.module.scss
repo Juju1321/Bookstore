@@ -1,0 +1,34 @@
+@import "src/assets/colors";
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 23px 0;
+  border-bottom: 1px solid $gray;
+}
+
+.input {
+  width: 542px;
+}
+
+.searchIcon {
+  cursor: pointer;
+  position: absolute;
+  top: 41px;
+  left: 831px;
+}
+
+.button {
+  display: flex;
+  gap: 8px;
+
+  div {
+    &:hover {
+      svg > path {
+        fill: $white;
+        stroke: $red;
+      }
+    }
+  }
+}

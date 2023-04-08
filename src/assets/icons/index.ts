@@ -5,3 +5,8 @@ export { NoContentIcon } from "./NoContentIcon";
 export { MinusIcon } from "./MinusIcon";
 export { StarIcon } from "./StarIcon";
 export { PlusIcon } from "./PlusIcon";
+export { LogoIcon } from "./LogoIcon";
+export { SearchIcon } from "./SearchIcon";
+export { CartIcon } from "./CartIcon";
+export { UserIcon } from "./UserIcon";
+export { FillHeartIcon } from "./FillHeartIcon";
