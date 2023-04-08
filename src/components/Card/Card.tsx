@@ -1,11 +1,11 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import classNames from "classnames";
 
-import styles from "./Card.module.scss";
-import Stars from "src/components/Stars";
 import Button from "src/components/Button";
 import { ButtonType } from "src/utils/@globalTypes";
 import { CancelIcon } from "src/assets/icons";
+import Count from "src/components/Count";
+import styles from "./Card.module.scss";
 
 export type CardType = {
   title: string;
@@ -30,6 +30,15 @@ export type CardProps = {
 const Card: FC<CardProps> = ({ card, type }) => {
   const { title, subtitle, image, price } = card;
 
+  const [color, setColor] = useState("");
+
+  const colors = ["#D7E4FD", "#CAEFF0", "#FEE9E2", "#F4EEFD"];
+  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+  useEffect(() => {
+    setColor(randomColor);
+  }, []);
+
   const isSearch = type === CardTypes.Search;
   const isCart = type === CardTypes.Cart;
 
@@ -46,6 +55,7 @@ const Card: FC<CardProps> = ({ card, type }) => {
         })}
       >
         <div
+          style={{ backgroundColor: color }}
           className={classNames(styles.imageContainer, {
             [styles.searchImageContainer]: isSearch,
             [styles.cartImageContainer]: isCart,
@@ -83,7 +93,11 @@ const Card: FC<CardProps> = ({ card, type }) => {
               {subtitle}
             </div>
           )}
-          {isCart && <div></div>}
+          {isCart && (
+            <div>
+              <Count />
+            </div>
+          )}
         </div>
       </div>
       <div
@@ -109,11 +123,7 @@ const Card: FC<CardProps> = ({ card, type }) => {
             />
           </div>
         )}
-        {type === CardTypes.Default && (
-          <div>
-            <Stars />
-          </div>
-        )}
+        {type === CardTypes.Default && <div></div>}
       </div>
     </div>
   );
