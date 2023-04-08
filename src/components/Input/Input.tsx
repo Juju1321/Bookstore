@@ -4,13 +4,14 @@ import classNames from "classnames";
 import styles from "./Input.module.scss";
 
 type InputProps = {
-  title: string;
+  title?: string;
   value: string;
   onChange: (value: string) => void;
   placeholder: string;
   type: string;
   errorText?: string;
   disabled?: boolean;
+  className?: string,
 };
 
 const Input: FC<InputProps> = ({
@@ -21,6 +22,7 @@ const Input: FC<InputProps> = ({
   errorText,
   disabled,
   type,
+    className
 }) => {
   const onChangeInputText = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
@@ -28,14 +30,14 @@ const Input: FC<InputProps> = ({
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>{title}</div>
+      {title && <div className={styles.title}>{title}</div>}
       <input
         placeholder={placeholder}
         onChange={onChangeInputText}
         value={value}
         type={type}
         disabled={disabled}
-        className={classNames(styles.input, {
+        className={classNames(styles.input, className, {
           [styles.disabledInput]: disabled,
           [styles.errorInput]: errorText,
         })}

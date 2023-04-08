@@ -1,0 +1,62 @@
+@import "src/assets/colors";
+@import "src/assets/mixins";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 56px 64px;
+  background-color: $purple;
+  max-width: 1120px;
+  box-sizing: border-box;
+}
+
+.title {
+  @include secondaryHeadline();
+  text-transform: uppercase;
+}
+
+.description {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  color: $secondary;
+  margin-bottom: 32px;
+}
+
+.inputButtonContainer {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 56px;
+}
+
+.input {
+  line-height: 24px;
+  padding: 16px 24px;
+  border-radius: 2px;
+  width: 845px;
+  border: 1px solid transparent;
+  &:active {
+    line-height: 24px;
+    padding: 16px 24px;
+    border-radius: 2px;
+    border: 1px solid $gray;
+  }
+  &:focus {
+    line-height: 24px;
+    padding: 16px 24px;
+    border-radius: 2px;
+    border: 1px solid $gray;
+  }
+}
+
+.button {
+  width: 147px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 16px 0;
+  height: 56px;
+}
