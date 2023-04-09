@@ -2,6 +2,7 @@ import React, { FC } from "react";
 
 import { CardListType, CardTypes } from "src/utils/@globalTypes";
 import Card from "src/components/Card";
+import EmptyState from "src/components/EmptyState";
 import styles from "./CardList.module.scss";
 
 type CardListProps = {
@@ -9,7 +10,7 @@ type CardListProps = {
 };
 
 const CardList: FC<CardListProps> = ({ cardList }) => {
-  return (
+  return cardList.length > 0 ? (
     <div className={styles.container}>
       {cardList.map((item, index) => {
         if (index > 0 && index <= 12) {
@@ -19,6 +20,11 @@ const CardList: FC<CardListProps> = ({ cardList }) => {
         }
       })}
     </div>
+  ) : (
+    <EmptyState
+      title={"Sorry, there's no books"}
+      description={"Try to check out another category"}
+    />
   );
 };
 
