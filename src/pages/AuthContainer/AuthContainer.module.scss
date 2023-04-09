@@ -1,0 +1,15 @@
+@import "src/assets/colors";
+
+.mainBlockContainer {
+  border: 1px solid $gray;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  //align-items: flex-start;
+  padding: 40px 32px;
+}
+
+.infoContainer {
+  display: flex;
+  justify-content: center;
+}
