@@ -2,30 +2,10 @@ import React, { FC, useEffect, useState } from "react";
 import classNames from "classnames";
 
 import Button from "src/components/Button";
-import { ButtonType } from "src/utils/@globalTypes";
+import { ButtonType, CardProps, CardTypes } from "src/utils/@globalTypes";
 import { CancelIcon } from "src/assets/icons";
 import Count from "src/components/Count";
 import styles from "./Card.module.scss";
-
-export type CardType = {
-  title: string;
-  subtitle: string;
-  isbn13: string;
-  price: string;
-  image: string;
-  url: string;
-};
-
-export enum CardTypes {
-  Default,
-  Search,
-  Cart,
-}
-
-export type CardProps = {
-  card: CardType;
-  type: CardTypes;
-};
 
 const Card: FC<CardProps> = ({ card, type }) => {
   const { title, subtitle, image, price } = card;
@@ -34,6 +14,9 @@ const Card: FC<CardProps> = ({ card, type }) => {
 
   const colors = ["#D7E4FD", "#CAEFF0", "#FEE9E2", "#F4EEFD"];
   const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+  const cutTitle = title.substring(0, 40).concat("...");
+  const cutSubtitle = subtitle.substring(0,90).concat("...");
 
   useEffect(() => {
     setColor(randomColor);
@@ -82,7 +65,7 @@ const Card: FC<CardProps> = ({ card, type }) => {
               [styles.cartTitle]: isCart,
             })}
           >
-            {title}
+            {title.length < 39 ? title : cutTitle}
           </div>
           {!isSearch && (
             <div
@@ -90,7 +73,7 @@ const Card: FC<CardProps> = ({ card, type }) => {
                 [styles.cartSubtitle]: isCart,
               })}
             >
-              {subtitle}
+              {subtitle.length < 89 ? subtitle : cutSubtitle}
             </div>
           )}
           {isCart && (

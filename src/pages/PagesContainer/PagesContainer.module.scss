@@ -6,12 +6,8 @@
   display: flex;
   flex-direction: column;
   background-color: $white;
-  height: 100%;
   justify-content: space-between;
-}
-
-.mainInfo {
-  margin: 72px 0;
+  gap: 72px
 }
 
 .footer {
@@ -19,6 +15,7 @@
   display: flex;
   justify-content: space-between;
   border-top: 1px solid $gray;
+  margin-top: 72px;
   div {
     color: $secondary;
   }

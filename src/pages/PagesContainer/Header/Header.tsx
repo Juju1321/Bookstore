@@ -11,8 +11,6 @@ import Input from "src/components/Input";
 import Button from "src/components/Button";
 import { ButtonType } from "src/utils/@globalTypes";
 import styles from "./Header.module.scss";
-import {NavLink} from "react-router-dom";
-import {RoutesList} from "src/pages/Router";
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState("");
