@@ -11,8 +11,8 @@ type AuthContainerProps = {
 const AuthContainer: FC<AuthContainerProps> = ({ children, className }) => {
   return (
     <div>
-      <div className={classNames(styles.infoContainer, className)}>
-        <div className={styles.mainBlockContainer}>{children}</div>
+      <div className={styles.infoContainer}>
+        <div className={classNames(styles.mainBlockContainer, className)}>{children}</div>
       </div>
     </div>
   );
