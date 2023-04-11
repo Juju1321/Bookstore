@@ -11,15 +11,17 @@ import Input from "src/components/Input";
 import Button from "src/components/Button";
 import { ButtonType } from "src/utils/@globalTypes";
 import styles from "./Header.module.scss";
+import {RoutesList} from "src/pages/Router";
+import {NavLink} from "react-router-dom";
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState("");
 
   return (
     <div className={styles.container}>
-      <div>
+      <NavLink to={RoutesList.Main}>
         <LogoIcon />
-      </div>
+      </NavLink>
       <div>
         <Input
           value={searchValue}
