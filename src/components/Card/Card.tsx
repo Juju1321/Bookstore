@@ -3,10 +3,12 @@ import classNames from "classnames";
 
 import Button from "src/components/Button";
 import { ButtonType, CardProps, CardTypes } from "src/utils/@globalTypes";
-import { CancelIcon } from "src/assets/icons";
+import { CancelIcon, HeartIcon } from "src/assets/icons";
 import Count from "src/components/Count";
 import styles from "./Card.module.scss";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { PostSelector, setFavoriteBook } from "src/redux/reducers/postSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Card: FC<CardProps> = ({ card, type }) => {
   const { title, subtitle, image, price, isbn13 } = card;
@@ -20,35 +22,46 @@ const Card: FC<CardProps> = ({ card, type }) => {
   const cutTitle = title.substring(0, 40).concat("...");
   const cutSubtitle = subtitle.substring(0, 90).concat("...");
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setColor(randomColor);
   }, []);
 
   const isSearch = type === CardTypes.Search;
   const isCart = type === CardTypes.Cart;
+  const isFavorite = type === CardTypes.Favorite;
 
   const onPostClick = () => {
-      navigate(`/books/${isbn13}`)
+    navigate(`/books/${isbn13}`);
   };
+
+  const onFavoriteClick = () => {
+    dispatch(setFavoriteBook({ card }));
+  };
+
+  const favoriteBook = useSelector(PostSelector.getFavoriteBook);
+  const favoriteIndex = favoriteBook.findIndex(
+    (post) => post.isbn13 === card.isbn13
+  );
 
   return (
     <div
       className={classNames(styles.container, {
         [styles.searchContainer]: isSearch,
-        [styles.cartContainer]: isCart,
+        [styles.cartContainer]: isCart || isFavorite,
       })}
-      onClick={onPostClick}
     >
       <div
         className={classNames({
-          [styles.cartBookContainer]: isCart,
+          [styles.cartBookContainer]: isCart || isFavorite,
         })}
       >
         <div
           style={{ backgroundColor: color }}
           className={classNames(styles.imageContainer, {
             [styles.searchImageContainer]: isSearch,
-            [styles.cartImageContainer]: isCart,
+            [styles.cartImageContainer]: isCart || isFavorite,
           })}
           onClick={onPostClick}
         >
@@ -57,20 +70,20 @@ const Card: FC<CardProps> = ({ card, type }) => {
             src={image}
             className={classNames(styles.image, {
               [styles.searchImage]: isSearch,
-              [styles.cartImage]: isCart,
+              [styles.cartImage]: isCart || isFavorite,
             })}
           />
         </div>
         <div
           className={classNames(styles.infoContainer, {
             [styles.searchInfoContainer]: isSearch,
-            [styles.cartInfoContainer]: isCart,
+            [styles.cartInfoContainer]: isCart || isFavorite,
           })}
         >
           <div
             className={classNames(styles.title, {
               [styles.searchTitle]: isSearch,
-              [styles.cartTitle]: isCart,
+              [styles.cartTitle]: isCart || isFavorite,
             })}
             onClick={onPostClick}
           >
@@ -79,10 +92,15 @@ const Card: FC<CardProps> = ({ card, type }) => {
           {!isSearch && (
             <div
               className={classNames(styles.subtitle, {
-                [styles.cartSubtitle]: isCart,
+                [styles.cartSubtitle]: isCart || isFavorite,
               })}
             >
               {subtitle.length < 89 ? subtitle : cutSubtitle}
+            </div>
+          )}
+          {isFavorite && (
+            <div className={classNames(styles.price, styles.cartPrice)}>
+              {price}
             </div>
           )}
           {isCart && (
@@ -94,10 +112,10 @@ const Card: FC<CardProps> = ({ card, type }) => {
       </div>
       <div
         className={classNames(styles.footerContainer, {
-          [styles.cartFooterContainer]: isCart,
+          [styles.cartFooterContainer]: isCart || isFavorite,
         })}
       >
-        {!isSearch && (
+        {!isSearch && !isFavorite && (
           <div
             className={classNames(styles.price, {
               [styles.cartPrice]: isCart,
@@ -111,6 +129,16 @@ const Card: FC<CardProps> = ({ card, type }) => {
             <Button
               title={<CancelIcon />}
               onClick={() => {}}
+              type={ButtonType.WhiteIcon}
+            />
+          </div>
+        )}
+        {isFavorite && (
+          <div>
+            <Button
+              title={<HeartIcon />}
+              onClick={onFavoriteClick}
+              className={styles.favoriteHearButton}
               type={ButtonType.WhiteIcon}
             />
           </div>

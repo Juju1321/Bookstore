@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   CartIcon,
@@ -11,11 +11,31 @@ import Input from "src/components/Input";
 import Button from "src/components/Button";
 import { ButtonType } from "src/utils/@globalTypes";
 import styles from "./Header.module.scss";
-import {RoutesList} from "src/pages/Router";
-import {NavLink} from "react-router-dom";
+import { RoutesList } from "src/pages/Router";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { PostSelector } from "src/redux/reducers/postSlice";
+import { FavoriteHeartIcon } from "src/assets/icons/FavoriteHeartIcon";
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
+
+  const onFavoriteClick = () => {
+    navigate(RoutesList.Favorites);
+  };
+
+  const [activeButton, setActiveButton] = useState(false);
+
+  const favoriteList = useSelector(PostSelector.getFavoriteBook);
+
+  useEffect(() => {
+    if (favoriteList.length > 0) {
+      setActiveButton(true);
+    } else {
+      setActiveButton(false);
+    }
+  }, [favoriteList]);
 
   return (
     <div className={styles.container}>
@@ -35,11 +55,19 @@ const Header = () => {
         </div>
       </div>
       <div className={styles.button}>
-        <Button
-          title={<FillHeartIcon />}
-          onClick={() => {}}
-          type={ButtonType.WhiteIcon}
-        />
+        {activeButton ? (
+          <Button
+            title={<FavoriteHeartIcon />}
+            onClick={onFavoriteClick}
+            type={ButtonType.WhiteIcon}
+          />
+        ) : (
+          <Button
+            title={<FillHeartIcon />}
+            onClick={onFavoriteClick}
+            type={ButtonType.WhiteIcon}
+          />
+        )}
         <Button
           title={<CartIcon />}
           onClick={() => {}}

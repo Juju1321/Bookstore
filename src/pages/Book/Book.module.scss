@@ -35,6 +35,17 @@
   }
 }
 
+.activeHeartButton {
+  svg > path {
+    stroke: $red;
+  }
+  &:hover {
+    svg > path {
+      stroke: $red;
+    }
+  }
+}
+
 .infoBook {
   width: 448px;
   border-top: 1px solid $gray;

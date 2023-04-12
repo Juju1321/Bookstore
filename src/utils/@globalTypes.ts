@@ -27,6 +27,7 @@ export enum CardTypes {
   Default,
   Search,
   Cart,
+  Favorite,
 }
 
 export type CardProps = {

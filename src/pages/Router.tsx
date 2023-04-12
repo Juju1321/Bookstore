@@ -7,6 +7,7 @@ import Auth from "src/pages/Auth";
 import ResetPassword from "src/pages/ResetPassword";
 import NewPassword from "src/pages/NewPassword";
 import Book from "src/pages/Book";
+import Favorites from "src/pages/Favorites";
 
 export enum RoutesList {
   Main = "/",
@@ -14,6 +15,7 @@ export enum RoutesList {
   Auth = "/auth",
   Reset = "/auth/reset",
   NewPassword = "/auth/reset/new-password",
+  Favorites = "/favorites",
   Default = "*",
 }
 const Router = () => {
@@ -23,6 +25,7 @@ const Router = () => {
         <Route path={RoutesList.Main} element={<PagesContainer />}>
           <Route path={RoutesList.Main} element={<Main />} />
           <Route path={RoutesList.Book} element={<Book />} />
+          <Route path={RoutesList.Favorites} element={<Favorites />} />
           <Route path={RoutesList.Auth} element={<Auth />} />
           <Route path={RoutesList.Reset} element={<ResetPassword />} />
           <Route path={RoutesList.NewPassword} element={<NewPassword />} />

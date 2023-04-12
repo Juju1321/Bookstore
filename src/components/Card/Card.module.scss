@@ -139,3 +139,10 @@
 .cartPrice {
   margin-right: 113px;
 }
+
+.favoriteHearButton {
+  svg > path {
+    stroke: $red;
+    fill: $red;
+  }
+}
