@@ -1,15 +1,21 @@
-import React, { FC } from "react";
+import React, { FC, useMemo } from "react";
 import classNames from "classnames";
 
-import {TabsNames, TabsProps} from "src/components/Tabs/types";
+import { TabsNames, TabsProps } from "src/components/Tabs/types";
 import styles from "./Tabs.module.scss";
 
-const Tabs: FC<TabsProps> = ({ tabsList, onClick, activeTab }) => {
+const Tabs: FC<TabsProps> = ({ onClick, activeTab }) => {
+  const TABS_LIST = [
+    { title: "Description", disabled: false, key: TabsNames.Description },
+    { title: "Authors", disabled: false, key: TabsNames.Authors },
+    { title: "Reviews", disabled: false, key: TabsNames.Reviews },
+  ];
+
   const onTabClick = (key: TabsNames) => () => onClick(key);
 
   return (
     <div className={styles.container}>
-      {tabsList.map((tab) => {
+      {TABS_LIST.map((tab) => {
         return (
           <div
             key={tab.key}

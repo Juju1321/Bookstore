@@ -12,6 +12,15 @@ export type CardType = {
   price: string;
   image: string;
   url: string;
+  error?: string;
+  authors?: string;
+  publisher?: string;
+  isbn10?: string;
+  pages?: string;
+  year?: string;
+  rating?: string;
+  desc?: string;
+  pdf?: string;
 };
 
 export enum CardTypes {

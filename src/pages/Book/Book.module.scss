@@ -1,0 +1,104 @@
+@import "src/assets/colors";
+@import "src/assets/mixins";
+
+.title {
+  margin-bottom: 48px;
+}
+
+.imagePriceContainer {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 72px;
+}
+
+.imageContainer {
+  width: 544px;
+  height: 472px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.image {
+  width: 300px;
+  height: 350px;
+}
+
+.heartButton {
+  position: absolute;
+  top: 0;
+  left: 488px;
+  svg > path {
+    stroke: $white;
+  }
+}
+
+.infoBook {
+  width: 448px;
+  border-top: 1px solid $gray;
+  padding-top: 40px;
+}
+
+.priceRatingContainer {
+  display: flex;
+}
+
+.price {
+  @include secondaryHeadline();
+}
+
+.bookInfoContainer {
+  margin-top: 24px;
+  margin-bottom: 89px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bookInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nameInfo {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  color: $secondary;
+}
+
+.info {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  text-align: right;
+  color: $primary;
+}
+
+.description {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  color: $primary;
+  margin: 50px 0;
+}
+
+.socialContainer {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 72px;
+}
+
+.socialIcon {
+  &:hover {
+    cursor: pointer;
+    svg > path {
+      stroke: $primary2;
+    }
+  }
+}

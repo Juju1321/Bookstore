@@ -6,17 +6,19 @@ import { ButtonType, CardProps, CardTypes } from "src/utils/@globalTypes";
 import { CancelIcon } from "src/assets/icons";
 import Count from "src/components/Count";
 import styles from "./Card.module.scss";
+import {useNavigate} from "react-router-dom";
 
 const Card: FC<CardProps> = ({ card, type }) => {
-  const { title, subtitle, image, price } = card;
+  const { title, subtitle, image, price, isbn13 } = card;
 
   const [color, setColor] = useState("");
+  const navigate = useNavigate();
 
   const colors = ["#D7E4FD", "#CAEFF0", "#FEE9E2", "#F4EEFD"];
   const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
   const cutTitle = title.substring(0, 40).concat("...");
-  const cutSubtitle = subtitle.substring(0,90).concat("...");
+  const cutSubtitle = subtitle.substring(0, 90).concat("...");
 
   useEffect(() => {
     setColor(randomColor);
@@ -25,12 +27,17 @@ const Card: FC<CardProps> = ({ card, type }) => {
   const isSearch = type === CardTypes.Search;
   const isCart = type === CardTypes.Cart;
 
+  const onPostClick = () => {
+      navigate(`/books/${isbn13}`)
+  };
+
   return (
     <div
       className={classNames(styles.container, {
         [styles.searchContainer]: isSearch,
         [styles.cartContainer]: isCart,
       })}
+      onClick={onPostClick}
     >
       <div
         className={classNames({
@@ -43,6 +50,7 @@ const Card: FC<CardProps> = ({ card, type }) => {
             [styles.searchImageContainer]: isSearch,
             [styles.cartImageContainer]: isCart,
           })}
+          onClick={onPostClick}
         >
           <img
             alt={"image"}
@@ -64,6 +72,7 @@ const Card: FC<CardProps> = ({ card, type }) => {
               [styles.searchTitle]: isSearch,
               [styles.cartTitle]: isCart,
             })}
+            onClick={onPostClick}
           >
             {title.length < 39 ? title : cutTitle}
           </div>

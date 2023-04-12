@@ -8,6 +8,11 @@ const getAllPosts = () => {
   return API.get("/new");
 };
 
+const getSinglePost = (isbn13: string) => {
+  return API.get(`/books/${isbn13}`);
+};
+
 export default {
   getAllPosts,
-}
+  getSinglePost,
+};

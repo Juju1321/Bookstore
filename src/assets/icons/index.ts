@@ -10,3 +10,6 @@ export { SearchIcon } from "./SearchIcon";
 export { CartIcon } from "./CartIcon";
 export { UserIcon } from "./UserIcon";
 export { FillHeartIcon } from "./FillHeartIcon";
+export { FacebookIcon } from "./FacebookIcon";
+export { TwitterIcon } from "./TwitterIcon";
+export { MoreIcon } from "./MoreIcon";

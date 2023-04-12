@@ -56,6 +56,12 @@
 .image {
   width: 226px;
   height: 264px;
+  &:hover {
+    cursor: pointer;
+    width: 236px;
+    height: 274px;
+    transition: all 0.3s ease;
+  }
 }
 
 .searchImage {
@@ -74,6 +80,11 @@
   margin-top: 21px;
   margin-bottom: 8px;
   height: 64px;
+  &:hover {
+    cursor: pointer;
+    color: $primary2;
+    transition: all 0.3s ease;
+  }
 }
 
 .searchInfoContainer {

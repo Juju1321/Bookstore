@@ -6,9 +6,11 @@ import Error404NotFound from "src/pages/Error404NotFound";
 import Auth from "src/pages/Auth";
 import ResetPassword from "src/pages/ResetPassword";
 import NewPassword from "src/pages/NewPassword";
+import Book from "src/pages/Book";
 
 export enum RoutesList {
   Main = "/",
+  Book = "/books/:isbn13",
   Auth = "/auth",
   Reset = "/auth/reset",
   NewPassword = "/auth/reset/new-password",
@@ -20,6 +22,7 @@ const Router = () => {
       <Routes>
         <Route path={RoutesList.Main} element={<PagesContainer />}>
           <Route path={RoutesList.Main} element={<Main />} />
+          <Route path={RoutesList.Book} element={<Book />} />
           <Route path={RoutesList.Auth} element={<Auth />} />
           <Route path={RoutesList.Reset} element={<ResetPassword />} />
           <Route path={RoutesList.NewPassword} element={<NewPassword />} />
