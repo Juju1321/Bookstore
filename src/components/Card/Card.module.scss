@@ -72,6 +72,12 @@
 .cartImage {
   width: 164px;
   height: 192px;
+  &:hover {
+    cursor: pointer;
+    width: 174px;
+    height: 202px;
+    transition: all 0.3s ease;
+  }
 }
 
 .title {

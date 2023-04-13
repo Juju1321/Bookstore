@@ -13,3 +13,4 @@ export { FillHeartIcon } from "./FillHeartIcon";
 export { FacebookIcon } from "./FacebookIcon";
 export { TwitterIcon } from "./TwitterIcon";
 export { MoreIcon } from "./MoreIcon";
+export { ActiveCartIcon } from "./ActiveCartIcon";

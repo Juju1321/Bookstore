@@ -21,11 +21,18 @@ const Header = () => {
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
 
-  const onFavoriteClick = () => {
-    navigate(RoutesList.Favorites);
+  const onUserClick = () => {
+    navigate(RoutesList.Auth);
+  };
+
+  const onCartClick = () => {
+    navigate(RoutesList.Cart);
   };
 
   const [activeButton, setActiveButton] = useState(false);
+  const onFavoriteClick = () => {
+    navigate(RoutesList.Favorites);
+  };
 
   const favoriteList = useSelector(PostSelector.getFavoriteBook);
 
@@ -70,12 +77,12 @@ const Header = () => {
         )}
         <Button
           title={<CartIcon />}
-          onClick={() => {}}
+          onClick={onCartClick}
           type={ButtonType.WhiteIcon}
         />
         <Button
           title={<UserIcon />}
-          onClick={() => {}}
+          onClick={onUserClick}
           type={ButtonType.WhiteIcon}
         />
       </div>

@@ -7,8 +7,8 @@ import { CancelIcon, HeartIcon } from "src/assets/icons";
 import Count from "src/components/Count";
 import styles from "./Card.module.scss";
 import { useNavigate } from "react-router-dom";
-import { PostSelector, setFavoriteBook } from "src/redux/reducers/postSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { setFavoriteBook } from "src/redux/reducers/postSlice";
+import { useDispatch } from "react-redux";
 
 const Card: FC<CardProps> = ({ card, type }) => {
   const { title, subtitle, image, price, isbn13 } = card;
@@ -39,11 +39,6 @@ const Card: FC<CardProps> = ({ card, type }) => {
   const onFavoriteClick = () => {
     dispatch(setFavoriteBook({ card }));
   };
-
-  const favoriteBook = useSelector(PostSelector.getFavoriteBook);
-  const favoriteIndex = favoriteBook.findIndex(
-    (post) => post.isbn13 === card.isbn13
-  );
 
   return (
     <div
