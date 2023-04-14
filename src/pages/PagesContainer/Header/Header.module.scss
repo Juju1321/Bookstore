@@ -29,6 +29,9 @@
         fill: $white;
         stroke: $red;
       }
+      svg > g > path {
+        stroke: $red;
+      }
     }
   }
 }

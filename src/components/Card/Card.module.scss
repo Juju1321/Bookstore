@@ -152,3 +152,29 @@
     fill: $red;
   }
 }
+
+.countContainer {
+  display: flex;
+  align-items: center;
+}
+
+.disabledButton {
+  svg > rect {
+    fill: $secondary;
+  }
+}
+
+.count {
+  @include tertiaryHeadline();
+  color: $primary;
+  padding: 0 23px;
+}
+
+.button {
+  &:hover svg > path {
+    fill: $primary2;
+  }
+  &:hover svg > rect {
+    fill: $primary2;
+  }
+}

@@ -10,20 +10,24 @@ import {
 import { ButtonType } from "src/utils/@globalTypes";
 import Tabs from "src/components/Tabs";
 import Subscribe from "src/components/Subscribe";
-import { useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getChosenPost,
   PostSelector,
   setFavoriteBook,
 } from "src/redux/reducers/postSlice";
+import {setCartList} from "src/redux/reducers/cartSlice";
 import styles from "./Book.module.scss";
 import { TabsNames } from "src/components/Tabs/types";
 import classNames from "classnames";
+import {RoutesList} from "src/pages/Router";
+import {CartSelector} from "src/redux/reducers/cartSlice";
 
 const Book = () => {
   const { isbn13 } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const chosenPost = useSelector(PostSelector.getChosenPost);
   const [color, setColor] = useState("");
@@ -37,6 +41,19 @@ const Book = () => {
   const onFavoriteClick = () => {
     dispatch(setFavoriteBook({ card: chosenPost }));
   };
+
+  const onAddCartClick = () => {
+    dispatch(setCartList({ cartList: chosenPost }));
+  };
+
+  const onCartClick = () => {
+    navigate(RoutesList.Cart)
+  }
+
+  const cartList = useSelector(CartSelector.getCartList);
+  const cartIndex = cartList.findIndex(
+    (post) => post.isbn13 === chosenPost?.isbn13
+  );
 
   const favoriteBook = useSelector(PostSelector.getFavoriteBook);
   const favoriteIndex = favoriteBook.findIndex(
@@ -108,11 +125,19 @@ const Book = () => {
               <div>{chosenPost?.pages}</div>
             </div>
           </div>
-          <Button
-            title={"add to cart"}
-            onClick={() => {}}
-            type={ButtonType.Primary}
-          />
+          {cartIndex === -1 ? (
+            <Button
+              title={"add to cart"}
+              onClick={onAddCartClick}
+              type={ButtonType.Primary}
+            />
+          ) : (
+            <Button
+              title={"added to cart. go to cart"}
+              onClick={onCartClick}
+              type={ButtonType.Primary}
+            />
+          )}
           <div></div>
         </div>
       </div>

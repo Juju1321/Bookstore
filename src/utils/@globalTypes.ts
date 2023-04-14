@@ -33,6 +33,7 @@ export enum CardTypes {
 export type CardProps = {
   card: CardType;
   type: CardTypes;
+  countPrice?: number | string;
 };
 
 export type CardListType = CardType[];

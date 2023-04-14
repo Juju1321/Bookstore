@@ -3,11 +3,11 @@ import classNames from "classnames";
 
 import Button from "src/components/Button";
 import { ButtonType, CardProps, CardTypes } from "src/utils/@globalTypes";
-import { CancelIcon, HeartIcon } from "src/assets/icons";
-import Count from "src/components/Count";
+import { CancelIcon, HeartIcon, MinusIcon, PlusIcon } from "src/assets/icons";
 import styles from "./Card.module.scss";
 import { useNavigate } from "react-router-dom";
 import { setFavoriteBook } from "src/redux/reducers/postSlice";
+import { setCartList } from "src/redux/reducers/cartSlice";
 import { useDispatch } from "react-redux";
 
 const Card: FC<CardProps> = ({ card, type }) => {
@@ -38,6 +38,22 @@ const Card: FC<CardProps> = ({ card, type }) => {
 
   const onFavoriteClick = () => {
     dispatch(setFavoriteBook({ card }));
+  };
+
+  const onCartClick = () => {
+    dispatch(setCartList({ cartList: card }));
+  };
+
+  const [count, setCount] = useState(1);
+
+  const countPrice = count * +price.substring(1);
+
+  const minusButton = () => {
+    if (count > 1) setCount(count - 1);
+  };
+
+  const plusCount = () => {
+    setCount(count + 1);
   };
 
   return (
@@ -100,7 +116,31 @@ const Card: FC<CardProps> = ({ card, type }) => {
           )}
           {isCart && (
             <div>
-              <Count />
+              <div className={styles.countContainer}>
+                {count === 1 ? (
+                  <Button
+                    title={<MinusIcon />}
+                    onClick={minusButton}
+                    disabled={true}
+                    className={styles.disabledButton}
+                    type={ButtonType.WhiteIcon}
+                  />
+                ) : (
+                  <Button
+                    title={<MinusIcon />}
+                    onClick={minusButton}
+                    className={styles.button}
+                    type={ButtonType.WhiteIcon}
+                  />
+                )}
+                <div className={styles.count}>{count}</div>
+                <Button
+                  title={<PlusIcon />}
+                  onClick={plusCount}
+                  className={styles.button}
+                  type={ButtonType.WhiteIcon}
+                />
+              </div>
             </div>
           )}
         </div>
@@ -116,14 +156,14 @@ const Card: FC<CardProps> = ({ card, type }) => {
               [styles.cartPrice]: isCart,
             })}
           >
-            {price}
+            {`$${countPrice.toFixed(2)}`}
           </div>
         )}
         {isCart && (
           <div>
             <Button
               title={<CancelIcon />}
-              onClick={() => {}}
+              onClick={onCartClick}
               type={ButtonType.WhiteIcon}
             />
           </div>

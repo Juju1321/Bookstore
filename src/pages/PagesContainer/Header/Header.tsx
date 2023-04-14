@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import {
+  ActiveCartIcon,
   CartIcon,
   FillHeartIcon,
   LogoIcon,
@@ -16,6 +17,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { PostSelector } from "src/redux/reducers/postSlice";
 import { FavoriteHeartIcon } from "src/assets/icons/FavoriteHeartIcon";
+import { CartSelector } from "src/redux/reducers/cartSlice";
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -30,11 +32,12 @@ const Header = () => {
   };
 
   const [activeButton, setActiveButton] = useState(false);
+  const [activeCartButton, setActiveCartButton] = useState(false);
   const onFavoriteClick = () => {
     navigate(RoutesList.Favorites);
   };
-
   const favoriteList = useSelector(PostSelector.getFavoriteBook);
+  const cartList = useSelector(CartSelector.getCartList);
 
   useEffect(() => {
     if (favoriteList.length > 0) {
@@ -42,7 +45,12 @@ const Header = () => {
     } else {
       setActiveButton(false);
     }
-  }, [favoriteList]);
+    if (cartList.length > 0) {
+      setActiveCartButton(true);
+    } else {
+      setActiveCartButton(false);
+    }
+  }, [favoriteList, cartList]);
 
   return (
     <div className={styles.container}>
@@ -75,11 +83,19 @@ const Header = () => {
             type={ButtonType.WhiteIcon}
           />
         )}
-        <Button
-          title={<CartIcon />}
-          onClick={onCartClick}
-          type={ButtonType.WhiteIcon}
-        />
+        {activeCartButton ? (
+          <Button
+            title={<ActiveCartIcon />}
+            onClick={onCartClick}
+            type={ButtonType.WhiteIcon}
+          />
+        ) : (
+          <Button
+            title={<CartIcon />}
+            onClick={onCartClick}
+            type={ButtonType.WhiteIcon}
+          />
+        )}
         <Button
           title={<UserIcon />}
           onClick={onUserClick}
