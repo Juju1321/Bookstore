@@ -6,12 +6,16 @@ type InitialType = {
   postsList: CardListType;
   chosenPost: CardType | null;
   favoriteBooks: CardListType;
+  searchedPosts: CardListType;
+  searchValue: string;
 };
 
 const initialState: InitialType = {
   postsList: [],
   chosenPost: null,
   favoriteBooks: [],
+  searchedPosts: [],
+  searchValue: "",
 };
 
 const postSlice = createSlice({
@@ -41,6 +45,12 @@ const postSlice = createSlice({
         state.favoriteBooks.splice(favoriteIndex, 1);
       }
     },
+    getSearchedPosts: (state, action: PayloadAction<string>) => {
+      state.searchValue = action.payload;
+    },
+    setSearchedPosts: (state, action: PayloadAction<CardListType>) => {
+      state.searchedPosts = action.payload;
+    },
   },
 });
 
@@ -50,6 +60,8 @@ export const {
   getChosenPost,
   setChosenPost,
   setFavoriteBook,
+  setSearchedPosts,
+  getSearchedPosts,
 } = postSlice.actions;
 
 export default postSlice.reducer;
@@ -58,4 +70,6 @@ export const PostSelector = {
   getAllPosts: (state: RootState) => state.posts.postsList,
   getChosenPost: (state: RootState) => state.posts.chosenPost,
   getFavoriteBook: (state: RootState) => state.posts.favoriteBooks,
+  getSearchedPosts: (state: RootState) => state.posts.searchedPosts,
+  getSearchValue: (state: RootState) => state.posts.searchValue,
 };

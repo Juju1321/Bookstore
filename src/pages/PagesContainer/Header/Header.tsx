@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {KeyboardEvent, useEffect, useState} from "react";
 
 import {
   ActiveCartIcon,
@@ -14,14 +14,15 @@ import { ButtonType } from "src/utils/@globalTypes";
 import styles from "./Header.module.scss";
 import { RoutesList } from "src/pages/Router";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { PostSelector } from "src/redux/reducers/postSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getSearchedPosts, PostSelector } from "src/redux/reducers/postSlice";
 import { FavoriteHeartIcon } from "src/assets/icons/FavoriteHeartIcon";
 import { CartSelector } from "src/redux/reducers/cartSlice";
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onUserClick = () => {
     navigate(RoutesList.Auth);
@@ -31,11 +32,23 @@ const Header = () => {
     navigate(RoutesList.Cart);
   };
 
+  const onClickSearchButton = () => {
+    dispatch(getSearchedPosts(searchValue));
+    navigate(RoutesList.Search);
+  };
+
   const [activeButton, setActiveButton] = useState(false);
   const [activeCartButton, setActiveCartButton] = useState(false);
   const onFavoriteClick = () => {
     navigate(RoutesList.Favorites);
   };
+
+  const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if(event.key === "Enter") {
+      onClickSearchButton()
+    }
+  }
+
   const favoriteList = useSelector(PostSelector.getFavoriteBook);
   const cartList = useSelector(CartSelector.getCartList);
 
@@ -64,8 +77,9 @@ const Header = () => {
           placeholder={"Search"}
           type={"text"}
           className={styles.input}
+          onKeyDown = {onKeyDown}
         />
-        <div className={styles.searchIcon}>
+        <div className={styles.searchIcon} onClick={onClickSearchButton}>
           <SearchIcon />
         </div>
       </div>
