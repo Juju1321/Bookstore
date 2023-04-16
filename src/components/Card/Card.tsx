@@ -66,6 +66,7 @@ const Card: FC<CardProps> = ({ card, type }) => {
       <div
         className={classNames({
           [styles.cartBookContainer]: isCart || isFavorite,
+          [styles.searchBookContainer]: isSearch
         })}
       >
         <div

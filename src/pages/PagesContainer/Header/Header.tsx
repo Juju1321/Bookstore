@@ -1,4 +1,4 @@
-import React, {KeyboardEvent, useEffect, useState} from "react";
+import React, { KeyboardEvent, useEffect, useState } from "react";
 
 import {
   ActiveCartIcon,
@@ -44,13 +44,17 @@ const Header = () => {
   };
 
   const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if(event.key === "Enter") {
-      onClickSearchButton()
+    if (event.key === "Enter") {
+      onClickSearchButton();
     }
-  }
+  };
 
   const favoriteList = useSelector(PostSelector.getFavoriteBook);
   const cartList = useSelector(CartSelector.getCartList);
+
+  const onHandleChange = (value: string) => {
+    setSearchValue(value);
+  };
 
   useEffect(() => {
     if (favoriteList.length > 0) {
@@ -73,11 +77,11 @@ const Header = () => {
       <div>
         <Input
           value={searchValue}
-          onChange={setSearchValue}
+          onChange={onHandleChange}
           placeholder={"Search"}
           type={"text"}
           className={styles.input}
-          onKeyDown = {onKeyDown}
+          onKeyDown={onKeyDown}
         />
         <div className={styles.searchIcon} onClick={onClickSearchButton}>
           <SearchIcon />

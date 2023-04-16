@@ -12,7 +12,6 @@
 
 .searchContainer {
   display: flex;
-  flex-direction: row;
   padding: 20px 20px;
   gap: 16px;
   width: 542px;
@@ -31,6 +30,10 @@
   height: 240px;
 }
 
+.searchBookContainer{
+ display: flex;
+ gap: 16px;
+}
 .cartBookContainer {
   display: flex;
   gap: 32px;
@@ -67,6 +70,12 @@
 .searchImage {
   width: 51px;
   height: 60px;
+  &:hover {
+    cursor: pointer;
+    width: 53px;
+    height: 62px;
+    transition: all 0.3s ease;
+  }
 }
 
 .cartImage {
@@ -109,8 +118,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 32px;
-  margin-bottom: 0;
-  margin-top: 0;
+  margin-top: 14px;
 }
 
 .cartTitle {

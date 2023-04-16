@@ -12,7 +12,7 @@ import {
 import API from "src/redux/api/index";
 import { AllPostsResponse } from "src/redux/sagas/@types";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { CardListType, CardType } from "src/utils/@globalTypes";
+import { CardType } from "src/utils/@globalTypes";
 
 function* getAllPostsWorker() {
   const { ok, data, problem }: ApiResponse<AllPostsResponse> = yield call(
