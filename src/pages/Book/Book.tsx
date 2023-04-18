@@ -138,7 +138,7 @@ const Book = () => {
               type={ButtonType.Primary}
             />
           )}
-          <div></div>
+          <div className={styles.preview} onClick={()=>{}}>Preview book</div>
         </div>
       </div>
       <Tabs onClick={onTabClick} activeTab={activeTab} />

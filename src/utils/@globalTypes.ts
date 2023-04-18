@@ -20,7 +20,10 @@ export type CardType = {
   year?: string;
   rating?: string;
   desc?: string;
-  pdf?: string;
+  pdf?: {
+    Chapter2?: string;
+    Chapter5?: string;
+  };
 };
 
 export enum CardTypes {
