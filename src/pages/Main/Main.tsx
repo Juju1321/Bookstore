@@ -6,16 +6,20 @@ import CardList from "src/components/CardList";
 import { getAllPosts, PostSelector } from "src/redux/reducers/postSlice";
 import Subscribe from "src/components/Subscribe";
 import styles from "./Main.module.scss";
+import Loader from "src/components/Loader";
 
 const Main = () => {
   const dispatch = useDispatch();
   const postsList = useSelector(PostSelector.getAllPosts);
+  const isLoading = useSelector(PostSelector.getLoading);
 
   useEffect(() => {
     dispatch(getAllPosts());
   }, []);
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <div className={styles.container}>
       <Title title={"New Releases Books"} />
       <CardList cardList={postsList} />

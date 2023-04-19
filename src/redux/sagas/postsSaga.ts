@@ -7,6 +7,7 @@ import {
   getSearchedPosts,
   setAllPosts,
   setChosenPost,
+  setLoading,
   setSearchedPosts,
 } from "src/redux/reducers/postSlice";
 import API from "src/redux/api/index";
@@ -15,6 +16,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { CardType } from "src/utils/@globalTypes";
 
 function* getAllPostsWorker() {
+  yield put(setLoading(true));
   const { ok, data, problem }: ApiResponse<AllPostsResponse> = yield call(
     API.getAllPosts
   );
@@ -23,9 +25,11 @@ function* getAllPostsWorker() {
   } else {
     console.warn("Error getting All posts", problem);
   }
+  yield put(setLoading(false));
 }
 
 function* getChosenPostWorker(action: PayloadAction<string>) {
+  yield put(setLoading(true));
   const { ok, data, problem }: ApiResponse<CardType> = yield call(
     API.getSinglePost,
     action.payload
@@ -35,9 +39,11 @@ function* getChosenPostWorker(action: PayloadAction<string>) {
   } else {
     console.warn("Error getting post", problem);
   }
+  yield put(setLoading(false));
 }
 
 function* getSearchedPostsWorker(action: PayloadAction<string>) {
+  yield put(setLoading(true))
   const { ok, data, problem }: ApiResponse<AllPostsResponse> = yield call(
     API.getSearchPosts,
     action.payload
@@ -47,6 +53,7 @@ function* getSearchedPostsWorker(action: PayloadAction<string>) {
   } else {
     console.warn("Error getting searched books", problem);
   }
+  yield put(setLoading(false))
 }
 
 export default function* postsSaga() {
