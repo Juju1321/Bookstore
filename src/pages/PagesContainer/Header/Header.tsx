@@ -51,8 +51,12 @@ const Header = () => {
   };
 
   const onClickSearchButton = () => {
-    dispatch(getSearchedPosts(searchValue));
-    navigate(RoutesList.Search);
+    if (searchValue) {
+      dispatch(getSearchedPosts(searchValue));
+      navigate(`/search/${searchValue}`)
+    } else {
+      navigate(RoutesList.Search);
+    }
   };
 
   useEffect(() => {
