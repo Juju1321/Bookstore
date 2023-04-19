@@ -3,12 +3,13 @@ import classNames from "classnames";
 
 import Button from "src/components/Button";
 import { ButtonType, CardProps, CardTypes } from "src/utils/@globalTypes";
-import { CancelIcon, HeartIcon, MinusIcon, PlusIcon } from "src/assets/icons";
+import {CancelIcon, FillStarIcon, HeartIcon, MinusIcon, PlusIcon, StarIcon} from "src/assets/icons";
 import styles from "./Card.module.scss";
 import { useNavigate } from "react-router-dom";
 import { setFavoriteBook } from "src/redux/reducers/postSlice";
 import { setCartList } from "src/redux/reducers/cartSlice";
 import { useDispatch } from "react-redux";
+import {Rating} from "react-simple-star-rating";
 
 const Card: FC<CardProps> = ({ card, type }) => {
   const { title, subtitle, image, price, isbn13 } = card;
@@ -18,6 +19,7 @@ const Card: FC<CardProps> = ({ card, type }) => {
 
   const colors = ["#D7E4FD", "#CAEFF0", "#FEE9E2", "#F4EEFD"];
   const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  const randomRating = Math.floor(Math.random() * (6 - 1) + 1)
 
   const cutTitle = title.substring(0, 40).concat("...");
   const cutSubtitle = subtitle.substring(0, 90).concat("...");
@@ -111,9 +113,17 @@ const Card: FC<CardProps> = ({ card, type }) => {
             </div>
           )}
           {isFavorite && (
+              <div className={styles.ratingPriceContainer}>
             <div className={classNames(styles.price, styles.cartPrice)}>
               {price}
             </div>
+              <div>
+              <Rating readonly={true}
+                      initialValue={randomRating}
+                      emptyIcon={<StarIcon />}
+                      fillIcon={<FillStarIcon />}/>
+              </div>
+              </div>
           )}
           {isCart && (
             <div>
@@ -179,7 +189,11 @@ const Card: FC<CardProps> = ({ card, type }) => {
             />
           </div>
         )}
-        {type === CardTypes.Default && <div></div>}
+        {type === CardTypes.Default && <div><Rating readonly={true}
+                                                    initialValue={randomRating}
+                                                    className={styles.rating}
+                                                    emptyIcon={<StarIcon />}
+                                                    fillIcon={<FillStarIcon />}/></div>}
       </div>
     </div>
   );

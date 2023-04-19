@@ -4,7 +4,9 @@ import Button from "src/components/Button";
 import {
   FacebookIcon,
   FillHeartIcon,
+  FillStarIcon,
   MoreIcon,
+  StarIcon,
   TwitterIcon,
 } from "src/assets/icons";
 import { ButtonType } from "src/utils/@globalTypes";
@@ -24,6 +26,7 @@ import classNames from "classnames";
 import { RoutesList } from "src/pages/Router";
 import { CartSelector } from "src/redux/reducers/cartSlice";
 import Loader from "src/components/Loader";
+import { Rating } from "react-simple-star-rating";
 
 const Book = () => {
   const { isbn13 } = useParams();
@@ -33,6 +36,7 @@ const Book = () => {
   const chosenPost = useSelector(PostSelector.getChosenPost);
   const [color, setColor] = useState("");
   const [activeTab, setActiveTab] = useState(TabsNames.Description);
+  const rating = chosenPost?.rating;
 
   const colors = ["#D7E4FD", "#CAEFF0", "#FEE9E2", "#F4EEFD"];
   const randomColor = colors[Math.floor(Math.random() * colors.length)];
@@ -111,7 +115,16 @@ const Book = () => {
             <div className={styles.infoBook}>
               <div className={styles.priceRatingContainer}>
                 <div className={styles.price}>{chosenPost?.price}</div>
-                <div></div>
+                {rating &&
+                  <div>
+                    <Rating
+                      readonly={true}
+                      initialValue={+rating}
+                      emptyIcon={<StarIcon />}
+                      fillIcon={<FillStarIcon />}
+                    />
+                  </div>
+                }
               </div>
               <div className={styles.bookInfoContainer}>
                 <div className={styles.bookInfo}>
