@@ -1,11 +1,16 @@
 @import "src/assets/colors";
 @import "src/assets/mixins";
 
+.container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
 .mainPriceContainer {
   width: 256px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   margin-top: 48px;
   gap: 24px;
 }

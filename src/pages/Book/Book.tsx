@@ -19,7 +19,7 @@ import {
   PostSelector,
   setFavoriteBook,
 } from "src/redux/reducers/postSlice";
-import { setCartList } from "src/redux/reducers/cartSlice";
+import {setCartList} from "src/redux/reducers/cartSlice";
 import styles from "./Book.module.scss";
 import { TabsNames } from "src/components/Tabs/types";
 import classNames from "classnames";

@@ -15,17 +15,20 @@ const Cart = () => {
     0
   );
 
+  // const countBook = count * price
+
   const vat = price * 0.2;
 
   return (
     <div>
       <Title title={"Your cart"} />
       <FavoriteCardList cardList={cartList} type={CardTypes.Cart} />
+      <div className={styles.container}>
       <div className={styles.mainPriceContainer}>
         <div className={styles.PriceAndVatContainer}>
           <div className={styles.priceContainer}>
             <div className={styles.priceTitle}>Sum total</div>
-            <div className={styles.price}>{`$ ${price}`}</div>
+            <div className={styles.price}>{`$ ${price.toFixed(2)}`}</div>
           </div>
           <div className={styles.priceContainer}>
             <div className={styles.priceTitle}>VAT</div>
@@ -52,6 +55,7 @@ const Cart = () => {
             type={ButtonType.Primary}
           />
         )}
+      </div>
       </div>
     </div>
   );

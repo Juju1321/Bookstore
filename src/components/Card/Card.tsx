@@ -7,7 +7,7 @@ import {CancelIcon, FillStarIcon, HeartIcon, MinusIcon, PlusIcon, StarIcon} from
 import styles from "./Card.module.scss";
 import { useNavigate } from "react-router-dom";
 import { setFavoriteBook } from "src/redux/reducers/postSlice";
-import { setCartList } from "src/redux/reducers/cartSlice";
+import {setCartList} from "src/redux/reducers/cartSlice";
 import { useDispatch } from "react-redux";
 import {Rating} from "react-simple-star-rating";
 
@@ -25,6 +25,9 @@ const Card: FC<CardProps> = ({ card, type }) => {
   const cutSubtitle = subtitle.substring(0, 90).concat("...");
 
   const dispatch = useDispatch();
+
+  const [count, setCount] = useState(1);
+  const countPrice = count * +price.substring(1);
 
   useEffect(() => {
     setColor(randomColor);
@@ -46,16 +49,13 @@ const Card: FC<CardProps> = ({ card, type }) => {
     dispatch(setCartList({ cartList: card }));
   };
 
-  const [count, setCount] = useState(1);
-
-  const countPrice = count * +price.substring(1);
-
-  const minusButton = () => {
-    if (count > 1) setCount(count - 1);
-  };
 
   const plusCount = () => {
     setCount(count + 1);
+  };
+
+  const minusButton = () => {
+    if (count > 1) setCount(count - 1);
   };
 
   return (
