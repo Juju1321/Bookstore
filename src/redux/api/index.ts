@@ -12,8 +12,8 @@ const getSinglePost = (isbn13: string) => {
   return API.get(`/books/${isbn13}`);
 };
 
-const getSearchPosts = (query: string) => {
-  return API.get(`/search/${query}`);
+const getSearchPosts = (query: string, page: number) => {
+  return API.get(`/search/${query}/${page}`);
 };
 
 export default {

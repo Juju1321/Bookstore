@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CardListType, CardType } from "src/utils/@globalTypes";
 import { RootState } from "src/redux/store";
+import { GetSearchedPostsPayload, SetAllPostsPayload } from "./@types";
 
 type InitialType = {
   postsList: CardListType;
@@ -9,6 +10,7 @@ type InitialType = {
   searchedPosts: CardListType;
   searchValue: string;
   isLoading: boolean;
+  postCount: number;
 };
 
 const initialState: InitialType = {
@@ -18,6 +20,7 @@ const initialState: InitialType = {
   searchedPosts: [],
   searchValue: "",
   isLoading: false,
+  postCount: 0,
 };
 
 const postSlice = createSlice({
@@ -47,11 +50,21 @@ const postSlice = createSlice({
         state.favoriteBooks.splice(favoriteIndex, 1);
       }
     },
-    getSearchedPosts: (state, action: PayloadAction<string>) => {
-      state.searchValue = action.payload;
+    getSearchedPosts: (
+      state,
+      action: PayloadAction<GetSearchedPostsPayload>
+    ) => {},
+    setSearchedPosts: (
+      state,
+      {
+        payload: { searchedPosts, postsCount },
+      }: PayloadAction<SetAllPostsPayload>
+    ) => {
+      state.searchedPosts = searchedPosts;
+      state.postCount = postsCount;
     },
-    setSearchedPosts: (state, action: PayloadAction<CardListType>) => {
-      state.searchedPosts = action.payload;
+    setSearchedValue: (state, action: PayloadAction<string>) => {
+      state.searchValue = action.payload;
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
@@ -67,6 +80,7 @@ export const {
   setFavoriteBook,
   setSearchedPosts,
   getSearchedPosts,
+  setSearchedValue,
   setLoading,
 } = postSlice.actions;
 
@@ -78,5 +92,6 @@ export const PostSelector = {
   getFavoriteBook: (state: RootState) => state.posts.favoriteBooks,
   getSearchedPosts: (state: RootState) => state.posts.searchedPosts,
   getSearchValue: (state: RootState) => state.posts.searchValue,
+  getSearchedPostsCount: (state: RootState) => state.posts.postCount,
   getLoading: (state: RootState) => state.posts.isLoading,
 };

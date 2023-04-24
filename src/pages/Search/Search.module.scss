@@ -13,3 +13,85 @@
   margin-top: 16px;
   margin-bottom: 48px;
 }
+
+.pagesContainer {
+  display: flex;
+  padding-top: 48px;
+  margin-bottom: 72px;
+  border-top: 1px solid $gray;
+  padding-left: 0;
+}
+
+.pageNumber {
+list-style-type: none;
+display: flex;
+margin-right: 32px;
+box-sizing: border-box;
+justify-content: center;
+align-items: center;
+color: $secondary;
+outline: none;
+user-select: none;
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+:last-child {
+  margin-right: 0;
+}
+&:hover {
+  cursor: pointer;
+  color: $primary;
+}
+}
+
+.linkPage {
+
+outline: none;
+&:focus {
+  outline: none;
+}
+}
+
+.activePageNumber {
+box-sizing: border-box;
+color: $primary;
+}
+
+.break {
+  color: $secondary;
+  list-style-type: none;
+  margin-right: 32px;
+  font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+&:hover {
+  cursor: pointer;
+  color: $primary;
+}
+}
+
+.arrowButton {
+  margin: auto;
+  list-style-type: none;
+  user-select: none;
+  color: $secondary;
+  font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+  &:hover {
+    color: $primary;
+    cursor: pointer;
+  }
+}
+
+.blockedButton {
+  color: $secondary;
+  &:hover {
+    background-color: transparent;
+    color: $secondary;
+    cursor: not-allowed;
+  }
+}

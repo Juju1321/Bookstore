@@ -14,6 +14,7 @@ import API from "src/redux/api/index";
 import { AllPostsResponse } from "src/redux/sagas/@types";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { CardType } from "src/utils/@globalTypes";
+import { GetSearchedPostsPayload } from "../reducers/@types";
 
 function* getAllPostsWorker() {
   yield put(setLoading(true));
@@ -42,14 +43,13 @@ function* getChosenPostWorker(action: PayloadAction<string>) {
   yield put(setLoading(false));
 }
 
-function* getSearchedPostsWorker(action: PayloadAction<string>) {
+function* getSearchedPostsWorker(action: PayloadAction<GetSearchedPostsPayload>) {
   yield put(setLoading(true))
+  const { query, page } = action.payload
   const { ok, data, problem }: ApiResponse<AllPostsResponse> = yield call(
-    API.getSearchPosts,
-    action.payload
-  );
+    API.getSearchPosts, query, page);
   if (ok && data) {
-    yield put(setSearchedPosts(data.books));
+    yield put(setSearchedPosts({searchedPosts: data.books, postsCount: +data.total}));
   } else {
     console.warn("Error getting searched books", problem);
   }

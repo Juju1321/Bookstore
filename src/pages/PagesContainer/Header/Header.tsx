@@ -15,7 +15,7 @@ import styles from "./Header.module.scss";
 import { RoutesList } from "src/pages/Router";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {getSearchedPosts, PostSelector} from "src/redux/reducers/postSlice";
+import {setSearchedValue, getSearchedPosts, PostSelector} from "src/redux/reducers/postSlice";
 import { FavoriteHeartIcon } from "src/assets/icons/FavoriteHeartIcon";
 import { CartSelector } from "src/redux/reducers/cartSlice";
 
@@ -52,7 +52,7 @@ const Header = () => {
 
   const onClickSearchButton = () => {
     if (searchValue) {
-      dispatch(getSearchedPosts(searchValue));
+      dispatch(setSearchedValue(searchValue));
       navigate(`/search/${searchValue}`)
     } else {
       navigate(RoutesList.Search);
