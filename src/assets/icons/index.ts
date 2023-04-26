@@ -15,3 +15,4 @@ export { TwitterIcon } from "./TwitterIcon";
 export { MoreIcon } from "./MoreIcon";
 export { ActiveCartIcon } from "./ActiveCartIcon";
 export { FillStarIcon } from "./FillStarIcon";
+export {CloseIconModal} from "./CloseIconModal";

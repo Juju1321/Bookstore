@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
 import Title from "src/components/Title";
 import Button from "src/components/Button";
+
 import {
   FacebookIcon,
   FillHeartIcon,
@@ -18,8 +20,10 @@ import {
   getChosenPost,
   PostSelector,
   setFavoriteBook,
+  setModalVisibility,
+  setPreviewBook,
 } from "src/redux/reducers/postSlice";
-import {setCartList} from "src/redux/reducers/cartSlice";
+import { setCartList } from "src/redux/reducers/cartSlice";
 import styles from "./Book.module.scss";
 import { TabsNames } from "src/components/Tabs/types";
 import classNames from "classnames";
@@ -27,6 +31,7 @@ import { RoutesList } from "src/pages/Router";
 import { CartSelector } from "src/redux/reducers/cartSlice";
 import Loader from "src/components/Loader";
 import { Rating } from "react-simple-star-rating";
+import Modal from "src/components/Modal/Modal";
 
 const Book = () => {
   const { isbn13 } = useParams();
@@ -46,6 +51,16 @@ const Book = () => {
   const onFavoriteClick = () => {
     dispatch(setFavoriteBook({ card: chosenPost }));
   };
+
+  const onPreviewClick = () => {
+    dispatch(setModalVisibility(true));
+    if (chosenPost?.pdf) {
+      const previewBook = Object.values(chosenPost?.pdf);
+      dispatch(setPreviewBook(previewBook[0]));
+    }
+  };
+
+  const previewModal = useSelector(PostSelector.getPreviewBook);
 
   const onAddCartClick = () => {
     dispatch(setCartList({ cartList: chosenPost }));
@@ -72,6 +87,30 @@ const Book = () => {
     }
     setColor(randomColor);
   }, []);
+
+  const isVisible = useSelector(PostSelector.getModalVisibility);
+  const onCloseModal = () => {
+    dispatch(setModalVisibility(false));
+    dispatch(setPreviewBook(null));
+  };
+
+  const [pageNumber, setPageNumber] = useState(1);
+  const [numPages, setNumPages] = useState(null);
+
+  const onDocumentLoadSuccess = ({ numPages }: any) => {
+    setNumPages(numPages);
+    setPageNumber(1);
+  };
+
+  const changePage = (offset: number) => {
+    setPageNumber((prevPage) => prevPage + offset);
+  };
+  const onClickPreviousPage = () => {
+    changePage(-1);
+  };
+  const onClickNextPage = () => {
+    changePage(+1);
+  };
 
   return chosenPost ? (
     <div>
@@ -115,7 +154,7 @@ const Book = () => {
             <div className={styles.infoBook}>
               <div className={styles.priceRatingContainer}>
                 <div className={styles.price}>{chosenPost?.price}</div>
-                {rating &&
+                {rating && (
                   <div>
                     <Rating
                       readonly={true}
@@ -124,7 +163,7 @@ const Book = () => {
                       fillIcon={<FillStarIcon />}
                     />
                   </div>
-                }
+                )}
               </div>
               <div className={styles.bookInfoContainer}>
                 <div className={styles.bookInfo}>
@@ -144,21 +183,23 @@ const Book = () => {
                   <div>{chosenPost?.pages}</div>
                 </div>
               </div>
-              {cartIndex === -1 ? (
-                <Button
-                  title={"add to cart"}
-                  onClick={onAddCartClick}
-                  type={ButtonType.Primary}
-                />
-              ) : (
-                <Button
-                  title={"added to cart. go to cart"}
-                  onClick={onCartClick}
-                  type={ButtonType.Primary}
-                />
-              )}
-              <div className={styles.preview} onClick={() => {}}>
-                Preview book
+              <div className={styles.buttonContainer}>
+                {cartIndex === -1 ? (
+                  <Button
+                    title={"add to cart"}
+                    onClick={onAddCartClick}
+                    type={ButtonType.Primary}
+                  />
+                ) : (
+                  <Button
+                    title={"added to cart. go to cart"}
+                    onClick={onCartClick}
+                    type={ButtonType.Primary}
+                  />
+                )}
+                <div className={styles.preview} onClick={onPreviewClick}>
+                  Preview book
+                </div>
               </div>
             </div>
           </div>
@@ -191,6 +232,28 @@ const Book = () => {
           "Be the first to know about new IT books, upcoming releases, exclusive offers and more."
         }
       />
+      <Modal isVisible={isVisible} onClose={onCloseModal}>
+        <div>
+          <div className={styles.pagePreviewContainer}>
+            {pageNumber > 1 && (
+              <div className={styles.pagePreview} onClick={onClickPreviousPage}>
+                Previous page
+              </div>
+            )}
+            <div className={styles.allPagePreview}>
+              Page {pageNumber} of {numPages}
+            </div>
+            {numPages && pageNumber < numPages && (
+              <div className={styles.pagePreview} onClick={onClickNextPage}>
+                Next page
+              </div>
+            )}
+          </div>
+          <Document file={previewModal} onLoadSuccess={onDocumentLoadSuccess}>
+            <Page height={788} pageNumber={pageNumber} />
+          </Document>
+        </div>
+      </Modal>
     </div>
   ) : null;
 };

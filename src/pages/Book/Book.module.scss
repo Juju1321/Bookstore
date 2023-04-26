@@ -123,4 +123,38 @@
   line-height: 24px;
   text-align: center;
   color: $primary;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.pagePreviewContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.pagePreview {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: $primary2;
+  cursor: pointer;
+  &:hover {
+    color: $primary;
+  }
+}
+
+.allPagePreview {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: $primary2;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }

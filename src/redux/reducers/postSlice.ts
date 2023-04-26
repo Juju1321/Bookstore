@@ -11,6 +11,8 @@ type InitialType = {
   searchValue: string;
   isLoading: boolean;
   postCount: number;
+  isVisibleModal: boolean;
+  previewBook: string | null;
 };
 
 const initialState: InitialType = {
@@ -21,6 +23,8 @@ const initialState: InitialType = {
   searchValue: "",
   isLoading: false,
   postCount: 0,
+  isVisibleModal: false,
+  previewBook: null,
 };
 
 const postSlice = createSlice({
@@ -34,6 +38,12 @@ const postSlice = createSlice({
     getChosenPost: (_, __: PayloadAction<string>) => {},
     setChosenPost: (state, action: PayloadAction<CardType | null>) => {
       state.chosenPost = action.payload;
+    },
+    setPreviewBook: (state, action: PayloadAction<string | null>) => {
+      state.previewBook = action.payload;
+    },
+    setModalVisibility: (state, action: PayloadAction<boolean>) => {
+      state.isVisibleModal = action.payload;
     },
     setFavoriteBook: (
       state,
@@ -82,6 +92,8 @@ export const {
   getSearchedPosts,
   setSearchedValue,
   setLoading,
+  setModalVisibility,
+  setPreviewBook,
 } = postSlice.actions;
 
 export default postSlice.reducer;
@@ -94,4 +106,6 @@ export const PostSelector = {
   getSearchValue: (state: RootState) => state.posts.searchValue,
   getSearchedPostsCount: (state: RootState) => state.posts.postCount,
   getLoading: (state: RootState) => state.posts.isLoading,
+  getModalVisibility: (state: RootState) => state.posts.isVisibleModal,
+  getPreviewBook: (state: RootState) => state.posts.previewBook,
 };

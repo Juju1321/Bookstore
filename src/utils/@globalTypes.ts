@@ -21,8 +21,7 @@ export type CardType = {
   rating?: string;
   desc?: string;
   pdf?: {
-    Chapter2?: string;
-    Chapter5?: string;
+    string: string;
   };
 };
 

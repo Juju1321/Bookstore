@@ -7,6 +7,7 @@ import styles from "./Search.module.scss";
 import SearchList from "src/components/SearchList";
 import Loader from "src/components/Loader";
 import ReactPaginate from "react-paginate";
+import EmptyState from "src/components/EmptyState";
 
 const Search = () => {
   const searchValue = useSelector(PostSelector.getSearchValue);
@@ -28,7 +29,7 @@ const Search = () => {
     setCurrentPage(selected + 1);
   };
 
-  return (
+  return searchList.length > 0 ? (
     <div>
       <Title
         title={`"${searchValue}" search results`}
@@ -57,6 +58,11 @@ const Search = () => {
         nextLinkClassName={styles.linkPage}
       />
     </div>
+  ) : (
+    <EmptyState
+      title={"Nothing was found"}
+      description={"Please, try another name"}
+    />
   );
 };
 export default Search;
