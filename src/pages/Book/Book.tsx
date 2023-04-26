@@ -197,9 +197,11 @@ const Book = () => {
                     type={ButtonType.Primary}
                   />
                 )}
-                <div className={styles.preview} onClick={onPreviewClick}>
-                  Preview book
-                </div>
+                {chosenPost.pdf && (
+                  <div className={styles.preview} onClick={onPreviewClick}>
+                    Preview book
+                  </div>
+                )}
               </div>
             </div>
           </div>
