@@ -1,0 +1,53 @@
+@import "src/assets/colors";
+
+.arrow {
+  margin-bottom: 37px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: $primary;
+  margin-top: 48px;
+}
+
+.inputContainer {
+  display: flex;
+  gap: 32px;
+  margin-top: 16px;
+}
+
+.input {
+  width: 544px;
+}
+
+.borderContainer {
+  border-bottom: 1px solid $gray;
+  padding-bottom: 72px;
+  margin-bottom: 48px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 32px;
+}
+
+.button {
+  width: 257px;
+  height: 56px;
+  padding: 14px 0;
+}
+
+.whiteButton {
+  color: $primary;
+  border: 1px solid $gray;
+  &:hover {
+    color: $primary2;
+  }
+}

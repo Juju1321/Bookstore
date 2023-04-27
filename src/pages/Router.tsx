@@ -10,11 +10,13 @@ import Book from "src/pages/Book";
 import Favorites from "src/pages/Favorites";
 import Cart from "src/pages/Cart";
 import Search from "src/pages/Search";
+import Account from "./Account/Account";
 
 export enum RoutesList {
   Main = "/",
   Book = "/books/:isbn13",
   Auth = "/auth",
+  Account = "/account",
   Reset = "/auth/reset",
   NewPassword = "/auth/reset/new-password",
   Favorites = "/favorites",
@@ -33,6 +35,7 @@ const Router = () => {
           <Route path={RoutesList.Cart} element={<Cart />} />
           <Route path={RoutesList.Search} element={<Search />} />
           <Route path={RoutesList.Auth} element={<Auth />} />
+          <Route path={RoutesList.Account} element={<Account />} />
           <Route path={RoutesList.Reset} element={<ResetPassword />} />
           <Route path={RoutesList.NewPassword} element={<NewPassword />} />
           <Route path={RoutesList.Default} element={<Error404NotFound />} />
