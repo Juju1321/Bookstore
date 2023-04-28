@@ -32,6 +32,7 @@ import { CartSelector } from "src/redux/reducers/cartSlice";
 import Loader from "src/components/Loader";
 import { Rating } from "react-simple-star-rating";
 import Modal from "src/components/Modal/Modal";
+import { ArrowIcon } from "src/assets/icons";
 
 const Book = () => {
   const { isbn13 } = useParams();
@@ -112,9 +113,15 @@ const Book = () => {
     changePage(+1);
   };
 
+  const onArrowClick = () => {
+    navigate(-1);
+  };
+
   return chosenPost ? (
     <div>
-      <div></div>
+      <div className={styles.arrow} onClick={onArrowClick}>
+        <ArrowIcon />
+      </div>
       {isLoading ? (
         <Loader />
       ) : (

@@ -1,6 +1,14 @@
 @import "src/assets/colors";
 @import "src/assets/mixins";
 
+
+.arrow {
+  margin-bottom: 37px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .title {
   margin-bottom: 48px;
 }

@@ -7,6 +7,13 @@
   align-items: flex-end;
 }
 
+.arrow {
+  margin-bottom: 37px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .mainPriceContainer {
   width: 256px;
   display: flex;

@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import Button from "src/components/Button";
 import styles from "./Cart.module.scss";
 import { CartSelector } from "src/redux/reducers/cartSlice";
+import { ArrowIcon } from "src/assets/icons";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const cartList = useSelector(CartSelector.getCartList);
@@ -19,8 +21,17 @@ const Cart = () => {
 
   const vat = price * 0.2;
 
+  const navigate = useNavigate();
+
+  const onArrowClick = () => {
+    navigate(-1);
+  };
+
   return (
     <div>
+      <div className={styles.arrow} onClick={onArrowClick}>
+        <ArrowIcon />
+      </div>
       <Title title={"Your cart"} />
       <FavoriteCardList cardList={cartList} type={CardTypes.Cart} />
       <div className={styles.container}>

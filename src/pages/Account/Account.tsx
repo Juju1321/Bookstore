@@ -5,7 +5,7 @@ import Title from "src/components/Title/Title";
 import { ButtonType } from "src/utils/@globalTypes";
 import styles from "./Account.module.scss";
 import classNames from "classnames";
-import { Arrow } from "src/assets/icons";
+import { ArrowIcon } from "src/assets/icons";
 import { useNavigate } from "react-router-dom";
 
 const Account = () => {
@@ -18,7 +18,7 @@ const Account = () => {
   return (
     <div>
       <div className={styles.arrow} onClick={onArrowClick}>
-        <Arrow />
+        <ArrowIcon />
       </div>
       <Title title="Account" />
       <div>
