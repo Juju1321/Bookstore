@@ -52,7 +52,7 @@ const Book = () => {
   const onFavoriteClick = () => {
     dispatch(setFavoriteBook({ card: chosenPost }));
   };
-
+  
   const onPreviewClick = () => {
     dispatch(setModalVisibility(true));
     if (chosenPost?.pdf) {

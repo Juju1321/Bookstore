@@ -19,19 +19,37 @@ const cartSlice = createSlice({
       action: PayloadAction<{ cartList: CardType | null }>
     ) => {
       const { cartList } = action.payload;
-      const cartIndex = state.cartList.findIndex(
-        (post) => post.isbn13 === cartList?.isbn13
+
+      const book = state.cartList.find(
+        (item) => item.isbn13 === cartList?.isbn13
       );
-      if (cartIndex === -1 && cartList) {
-        state.cartList.push(cartList);
-      } else {
-        state.cartList.splice(cartIndex, 1);
+      if (book && book.quantity) {
+        book.quantity++;
+      } else if (cartList) {
+        state.cartList.push({ ...cartList, quantity: 1 });
       }
+    },
+    reduceQuantity: (state, action: PayloadAction<string>) => {
+      const book = state.cartList.find(
+        (item) => item.isbn13 === action.payload
+      );
+      if (book && book.quantity)
+        book.quantity === 1 ? (book.quantity = 1) : book.quantity--;
+    },
+    removeBook: (state, action: PayloadAction<string>) => {
+      const removeBook = state.cartList.filter(
+        (item) => item.isbn13 !== action.payload
+      );
+      state.cartList = removeBook;
+    },
+    clearCart: (state) => {
+      state.cartList = [];
     },
   },
 });
 
-export const { setCartList } = cartSlice.actions;
+export const { setCartList, reduceQuantity, removeBook, clearCart } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;
 

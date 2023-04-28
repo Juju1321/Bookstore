@@ -23,6 +23,7 @@ export type CardType = {
   pdf?: {
     string: string;
   };
+  quantity?: number;
 };
 
 export enum CardTypes {
