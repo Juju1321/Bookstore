@@ -11,6 +11,7 @@ import Favorites from "src/pages/Favorites";
 import Cart from "src/pages/Cart";
 import Search from "src/pages/Search";
 import Account from "./Account/Account";
+import { useAuth } from "src/hooks/useAuth";
 
 export enum RoutesList {
   Main = "/",
@@ -25,17 +26,28 @@ export enum RoutesList {
   Default = "*",
 }
 const Router = () => {
+  const { isAuth } = useAuth();
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path={RoutesList.Main} element={<PagesContainer />}>
           <Route path={RoutesList.Main} element={<Main />} />
           <Route path={RoutesList.Book} element={<Book />} />
-          <Route path={RoutesList.Favorites} element={<Favorites />} />
-          <Route path={RoutesList.Cart} element={<Cart />} />
+          <Route
+            path={RoutesList.Favorites}
+            element={isAuth ? <Favorites /> : <Auth />}
+          />
+          <Route
+            path={RoutesList.Cart}
+            element={isAuth ? <Cart /> : <Auth />}
+          />
           <Route path={RoutesList.Search} element={<Search />} />
           <Route path={RoutesList.Auth} element={<Auth />} />
-          <Route path={RoutesList.Account} element={<Account />} />
+          <Route
+            path={RoutesList.Account}
+            element={isAuth ? <Account /> : <Auth />}
+          />
           <Route path={RoutesList.Reset} element={<ResetPassword />} />
           <Route path={RoutesList.NewPassword} element={<NewPassword />} />
           <Route path={RoutesList.Default} element={<Error404NotFound />} />

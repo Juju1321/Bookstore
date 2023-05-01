@@ -40,3 +40,10 @@ export type CardProps = {
 };
 
 export type CardListType = CardType[];
+
+export type UserInfo = {
+  name?: string | null;
+  email: string | null;
+  token: string | null;
+  id: string | null;
+};

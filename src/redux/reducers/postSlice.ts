@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CardListType, CardType } from "src/utils/@globalTypes";
 import { RootState } from "src/redux/store";
 import { GetSearchedPostsPayload, SetAllPostsPayload } from "./@types";
+import { clearCart } from "src/redux/reducers/cartSlice";
 
 type InitialType = {
   postsList: CardListType;
@@ -60,6 +61,9 @@ const postSlice = createSlice({
         state.favoriteBooks.splice(favoriteIndex, 1);
       }
     },
+    clearFavorites: (state) => {
+      state.favoriteBooks = [];
+    },
     getSearchedPosts: (
       state,
       action: PayloadAction<GetSearchedPostsPayload>
@@ -88,6 +92,7 @@ export const {
   getChosenPost,
   setChosenPost,
   setFavoriteBook,
+  clearFavorites,
   setSearchedPosts,
   getSearchedPosts,
   setSearchedValue,

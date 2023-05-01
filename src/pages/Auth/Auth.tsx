@@ -7,6 +7,7 @@ import Button from "src/components/Button";
 import classNames from "classnames";
 import { ButtonType } from "src/utils/@globalTypes";
 import SignUp from "src/components/SignUp";
+import { useDispatch } from "react-redux";
 
 const Auth = () => {
   const [activeSignInButton, setActiveSignInButton] = useState(true);

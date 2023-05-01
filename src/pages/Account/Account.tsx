@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "src/components/Button/Button";
 import Input from "src/components/Input/Input";
 import Title from "src/components/Title/Title";
@@ -7,12 +7,37 @@ import styles from "./Account.module.scss";
 import classNames from "classnames";
 import { ArrowIcon } from "src/assets/icons";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { removeUser } from "src/redux/reducers/userSlice";
+import { RoutesList } from "src/pages/Router";
+import { useAuth } from "src/hooks/useAuth";
+import { clearCart } from "src/redux/reducers/cartSlice";
+import { clearFavorites } from "src/redux/reducers/postSlice";
 
 const Account = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { name, email } = useAuth();
+  const [nameUser, setName] = useState("");
+  const [emailUser, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const onChangeName = (value: string) => setName(value);
+  const onChangeEmail = (value: string) => setEmail(value);
+  const onChangePassword = (value: string) => setPassword(value);
+
+  const onChangeConfirmPassword = (value: string) => setConfirmPassword(value);
 
   const onArrowClick = () => {
     navigate(-1);
+  };
+
+  const onLogOutClick = () => {
+    dispatch(removeUser());
+    dispatch(clearCart());
+    dispatch(clearFavorites());
+    navigate(RoutesList.Main);
   };
 
   return (
@@ -24,22 +49,26 @@ const Account = () => {
       <div>
         <div className={styles.title}>Profile</div>
         <div className={styles.inputContainer}>
-          <Input
-            className={styles.input}
-            value={""}
-            title="Name"
-            onChange={() => {}}
-            placeholder={""}
-            type="text"
-          />
-          <Input
-            className={styles.input}
-            value={""}
-            title="Email"
-            onChange={() => {}}
-            placeholder={""}
-            type="text"
-          />
+          {name && (
+            <Input
+              className={styles.input}
+              value={nameUser}
+              title="Name"
+              onChange={onChangeName}
+              placeholder={name}
+              type="text"
+            />
+          )}
+          {email && (
+            <Input
+              className={styles.input}
+              value={emailUser}
+              title="Email"
+              onChange={onChangeEmail}
+              placeholder={email}
+              type="text"
+            />
+          )}
         </div>
       </div>
       <div className={styles.borderContainer}>
@@ -48,24 +77,24 @@ const Account = () => {
           className={styles.input}
           value={""}
           title="Password"
-          onChange={() => {}}
-          placeholder={""}
+          onChange={onChangePassword}
+          placeholder={"Password"}
           type="password"
         />
         <div className={styles.inputContainer}>
           <Input
             className={styles.input}
-            value={""}
+            value={password}
             title="New password"
-            onChange={() => {}}
+            onChange={onChangePassword}
             placeholder="New password"
             type="password"
           />
           <Input
             className={styles.input}
-            value={""}
+            value={confirmPassword}
             title="Confirm new password"
-            onChange={() => {}}
+            onChange={onChangeConfirmPassword}
             placeholder="Confirm new password"
             type="password"
           />
@@ -81,8 +110,14 @@ const Account = () => {
         <Button
           className={classNames(styles.button, styles.whiteButton)}
           title="cancel"
-          onClick={() => {}}
+          onClick={onArrowClick}
           type={ButtonType.White}
+        />
+        <Button
+          className={styles.button}
+          title="Log Out"
+          onClick={onLogOutClick}
+          type={ButtonType.Primary}
         />
       </div>
     </div>

@@ -10,12 +10,12 @@ import {
 } from "src/assets/icons";
 import Input from "src/components/Input";
 import Button from "src/components/Button";
-import {ButtonType} from "src/utils/@globalTypes";
+import { ButtonType } from "src/utils/@globalTypes";
 import styles from "./Header.module.scss";
 import { RoutesList } from "src/pages/Router";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {setSearchedValue, getSearchedPosts, PostSelector} from "src/redux/reducers/postSlice";
+import { setSearchedValue, PostSelector } from "src/redux/reducers/postSlice";
 import { FavoriteHeartIcon } from "src/assets/icons/FavoriteHeartIcon";
 import { CartSelector } from "src/redux/reducers/cartSlice";
 
@@ -25,7 +25,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const onUserClick = () => {
-    navigate(RoutesList.Auth);
+    navigate(RoutesList.Account);
   };
 
   const onCartClick = () => {
@@ -53,10 +53,15 @@ const Header = () => {
   const onClickSearchButton = () => {
     if (searchValue) {
       dispatch(setSearchedValue(searchValue));
-      navigate(`/search/${searchValue}`)
+      navigate(`/search/${searchValue}`);
     } else {
       navigate(RoutesList.Search);
     }
+  };
+
+  const onLogoClick = () => {
+    navigate(RoutesList.Main);
+    setSearchValue("");
   };
 
   useEffect(() => {
@@ -74,9 +79,9 @@ const Header = () => {
 
   return (
     <div className={styles.container}>
-      <NavLink to={RoutesList.Main}>
+      <div onClick={onLogoClick}>
         <LogoIcon />
-      </NavLink>
+      </div>
       <div>
         <Input
           value={searchValue}
