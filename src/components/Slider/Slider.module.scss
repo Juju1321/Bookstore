@@ -1,0 +1,15 @@
+@import "src/assets/colors";
+
+.container {
+  margin: 72px 0;
+}
+
+.sliderContainer {
+  display: flex;
+  gap: 32px;
+}
+
+.swiper {
+  display: flex !important;
+  flex-direction: column-reverse !important;
+}

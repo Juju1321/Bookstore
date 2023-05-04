@@ -33,6 +33,8 @@ import Loader from "src/components/Loader";
 import { Rating } from "react-simple-star-rating";
 import Modal from "src/components/Modal/Modal";
 import { ArrowIcon } from "src/assets/icons";
+import Slider from "src/components/Slider";
+
 
 const Book = () => {
   const { isbn13 } = useParams();
@@ -90,6 +92,7 @@ const Book = () => {
   }, []);
 
   const isVisible = useSelector(PostSelector.getModalVisibility);
+  const books = useSelector(PostSelector.getAllPosts);
   const onCloseModal = () => {
     dispatch(setModalVisibility(false));
     dispatch(setPreviewBook(null));
@@ -241,6 +244,7 @@ const Book = () => {
           "Be the first to know about new IT books, upcoming releases, exclusive offers and more."
         }
       />
+      {books.length > 0 && <Slider booksSlider={books} title={"Similar Books"}/>}
       <Modal isVisible={isVisible} onClose={onCloseModal}>
         <div>
           <div className={styles.pagePreviewContainer}>

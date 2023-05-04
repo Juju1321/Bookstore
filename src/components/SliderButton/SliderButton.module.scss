@@ -1,0 +1,31 @@
+@import "src/assets/colors";
+
+.titleWithButton {
+  margin-bottom: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 60px;
+  color: $primary;
+  text-transform: uppercase;
+}
+
+.swiperButton{
+  display: flex;
+  gap: 16px;
+}
+
+.arrowButton {
+  cursor: pointer;
+  &:hover {
+    svg > path {
+      fill: $primary2;
+    }
+  }
+}

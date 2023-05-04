@@ -17,3 +17,5 @@ export { ActiveCartIcon } from "./ActiveCartIcon";
 export { FillStarIcon } from "./FillStarIcon";
 export { CloseIconModal } from "./CloseIconModal";
 export { ArrowIcon } from "./ArrowIcon";
+export {LeftArrowIcon} from "./LeftArrowIcon";
+export {RightArrowIcon} from "./RightArrowIcon";
