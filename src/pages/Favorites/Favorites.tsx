@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Title from "src/components/Title";
 import FavoriteCardList from "src/components/FavoriteCardList/FavoriteCardList";
-import { useSelector } from "react-redux";
-import { PostSelector } from "src/redux/reducers/postSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllPosts, PostSelector } from "src/redux/reducers/postSlice";
 import { CardTypes } from "src/utils/@globalTypes";
 import { ArrowIcon } from "src/assets/icons";
 import { useNavigate } from "react-router-dom";
@@ -13,10 +13,15 @@ const Favorites = () => {
   const favoriteList = useSelector(PostSelector.getFavoriteBook);
   const books = useSelector(PostSelector.getAllPosts);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onArrowClick = () => {
     navigate(-1);
   };
+
+  useEffect(() => {
+    dispatch(getAllPosts());
+  }, []);
 
   return (
     <div>
@@ -25,9 +30,7 @@ const Favorites = () => {
       </div>
       <Title title={"Favorites"} />
       <FavoriteCardList cardList={favoriteList} type={CardTypes.Favorite} />
-      {books.length > 0 && (
         <Slider booksSlider={books} title={"Popular Books"} />
-      )}
     </div>
   );
 };

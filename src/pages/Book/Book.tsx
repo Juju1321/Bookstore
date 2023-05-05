@@ -17,6 +17,7 @@ import Subscribe from "src/components/Subscribe";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getAllPosts,
   getChosenPost,
   PostSelector,
   setFavoriteBook,
@@ -89,10 +90,13 @@ const Book = () => {
       dispatch(getChosenPost(isbn13));
     }
     setColor(randomColor);
+    dispatch(getAllPosts());
   }, []);
 
   const isVisible = useSelector(PostSelector.getModalVisibility);
+
   const books = useSelector(PostSelector.getAllPosts);
+
   const onCloseModal = () => {
     dispatch(setModalVisibility(false));
     dispatch(setPreviewBook(null));
@@ -244,7 +248,7 @@ const Book = () => {
           "Be the first to know about new IT books, upcoming releases, exclusive offers and more."
         }
       />
-      {books.length > 0 && <Slider booksSlider={books} title={"Similar Books"}/>}
+      <Slider booksSlider={books} title={"Similar Books"}/>
       <Modal isVisible={isVisible} onClose={onCloseModal}>
         <div>
           <div className={styles.pagePreviewContainer}>
