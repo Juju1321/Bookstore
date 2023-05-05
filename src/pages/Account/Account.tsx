@@ -1,37 +1,37 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import classNames from "classnames";
+
 import Button from "src/components/Button/Button";
 import Input from "src/components/Input/Input";
 import Title from "src/components/Title/Title";
-import { ButtonType } from "src/utils/@globalTypes";
-import styles from "./Account.module.scss";
-import classNames from "classnames";
-import { ArrowIcon } from "src/assets/icons";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { removeUser } from "src/redux/reducers/userSlice";
 import { RoutesList } from "src/pages/Router";
+import { ArrowIcon } from "src/assets/icons";
 import { useAuth } from "src/hooks/useAuth";
+import { removeUser } from "src/redux/reducers/userSlice";
 import { clearCart } from "src/redux/reducers/cartSlice";
 import { clearFavorites } from "src/redux/reducers/postSlice";
+import { ButtonType } from "src/utils/@globalTypes";
+import styles from "./Account.module.scss";
 
 const Account = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const { name, email } = useAuth();
+
   const [nameUser, setName] = useState("");
   const [emailUser, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [confirmPassword, setConfirmPassword] = useState("");
+
   const onChangeName = (value: string) => setName(value);
   const onChangeEmail = (value: string) => setEmail(value);
   const onChangePassword = (value: string) => setPassword(value);
-
   const onChangeConfirmPassword = (value: string) => setConfirmPassword(value);
 
-  const onArrowClick = () => {
-    navigate(-1);
-  };
+  const onArrowClick = () => navigate(-1);
 
   const onLogOutClick = () => {
     dispatch(removeUser());

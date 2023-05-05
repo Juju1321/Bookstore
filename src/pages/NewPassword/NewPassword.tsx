@@ -1,20 +1,29 @@
 import React, { useState, useEffect } from "react";
-import AuthContainer from "src/pages/AuthContainer";
-import styles from "./NewPassword.module.scss";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { getAuth, confirmPasswordReset } from "firebase/auth";
+
 import Input from "src/components/Input";
 import Button from "src/components/Button";
-import { ButtonType } from "src/utils/@globalTypes";
-import { getAuth, confirmPasswordReset } from "firebase/auth";
-import { useNavigate, useSearchParams } from "react-router-dom";
 import { RoutesList } from "../Router";
+import AuthContainer from "src/pages/AuthContainer";
+import { ButtonType } from "src/utils/@globalTypes";
+import styles from "./NewPassword.module.scss";
 
 const NewPassword = () => {
+  const navigate = useNavigate();
+
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const onChangePassword = (value: string) => setPassword(value);
-  const onChangeConfirmPassword = (value: string) => setConfirmPassword(value);
   const [passwordError, setPasswordError] = useState("");
   const [passwordTouched, setPasswordTouched] = useState(false);
+
+  const [searchParams] = useSearchParams();
+  const oobCode = searchParams.get("oobCode");
+
+  const onChangePassword = (value: string) => setPassword(value);
+  const onChangeConfirmPassword = (value: string) => setConfirmPassword(value);
+  const onBlurPassword = () => setPasswordTouched(true);
+
 
   useEffect(() => {
     if (passwordTouched) {
@@ -27,15 +36,6 @@ const NewPassword = () => {
       }
     }
   }, [confirmPassword, password, passwordTouched]);
-
-  const onBlurPassword = () => {
-    setPasswordTouched(true);
-  };
-
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-
-  const oobCode = searchParams.get("oobCode");
 
   const onNewPasswordClick =
     (oobCode: string | null, newPassword: string) => () => {

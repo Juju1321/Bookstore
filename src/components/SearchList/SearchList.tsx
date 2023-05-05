@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import styles from "./SearchList.module.scss";
-import EmptyState from "src/components/EmptyState";
-import {CardListType, CardTypes} from "src/utils/@globalTypes";
 
+import {CardListType, CardTypes} from "src/utils/@globalTypes";
+import EmptyState from "src/components/EmptyState";
 import Card from "src/components/Card";
+import styles from "./SearchList.module.scss";
 
 type SearchListProps = {
     cardList: CardListType;
@@ -18,8 +18,8 @@ const SearchList: FC<SearchListProps> = ({ cardList }) => {
         </div>
     ) : (
         <EmptyState
-            title={"Sorry, there's no books"}
-            description={"Try to check out another category"}
+            title={"Sorry, nothing found"}
+            description={"Try writing a different title for the book"}
         />
     );
 };

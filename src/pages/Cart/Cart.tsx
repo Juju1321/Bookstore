@@ -1,35 +1,31 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import Title from "src/components/Title";
 import FavoriteCardList from "src/components/FavoriteCardList/FavoriteCardList";
-import { ButtonType, CardTypes } from "src/utils/@globalTypes";
-import { useDispatch, useSelector } from "react-redux";
 import Button from "src/components/Button";
-import styles from "./Cart.module.scss";
-import { CartSelector, clearCart } from "src/redux/reducers/cartSlice";
 import { ArrowIcon } from "src/assets/icons";
-import { useNavigate } from "react-router-dom";
+import { ButtonType, CardTypes } from "src/utils/@globalTypes";
+import { CartSelector, clearCart } from "src/redux/reducers/cartSlice";
+import styles from "./Cart.module.scss";
 
 const Cart = () => {
   const cartList = useSelector(CartSelector.getCartList);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const price = cartList.reduce((accumulator, item) => {
     if (item?.quantity) {
       return accumulator + item?.quantity * +item?.price.substring(1);
     }
     return accumulator;
   }, 0);
-
   const vat = price * 0.2;
 
-  const navigate = useNavigate();
-
-  const onArrowClick = () => {
-    navigate(-1);
-  };
-
-  const onClickCheckOut = () => {
-    dispatch(clearCart());
-  };
+  const onArrowClick = () => navigate(-1);
+  const onClickCheckOut = () => dispatch(clearCart());
 
   return (
     <div>
@@ -56,20 +52,12 @@ const Cart = () => {
               2
             )}`}</div>
           </div>
-          {cartList.length > 0 ? (
-            <Button
-              title={"check out"}
-              onClick={onClickCheckOut}
-              type={ButtonType.Primary}
-            />
-          ) : (
-            <Button
-              title={"check out"}
-              disabled={true}
-              onClick={() => {}}
-              type={ButtonType.Primary}
-            />
-          )}
+          <Button
+            title={"check out"}
+            onClick={onClickCheckOut}
+            disabled={!(cartList.length > 0)}
+            type={ButtonType.Primary}
+          />
         </div>
       </div>
     </div>

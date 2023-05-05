@@ -1,21 +1,25 @@
 import React, { useState, useEffect, useMemo } from "react";
-import AuthContainer from "src/pages/AuthContainer";
+import { useNavigate } from "react-router-dom";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+
 import Input from "src/components/Input";
 import Button from "src/components/Button";
-import styles from "./ResetPassword.module.scss";
+import AuthContainer from "src/pages/AuthContainer";
 import { ButtonType } from "src/utils/@globalTypes";
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { RoutesList } from "../Router";
-import { useNavigate } from "react-router-dom";
+import styles from "./ResetPassword.module.scss";
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [emailTouched, setEmailTouched] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const onChangeEmail = (value: string) => setEmail(value);
 
   const navigate = useNavigate();
+
+  const onChangeEmail = (value: string) => setEmail(value);
+  const onGoToMainClick = () => navigate(RoutesList.Main);
+  const onBlurEmail = () => setEmailTouched(true);
 
   const onResetClick = (email: string) => () => {
     const auth = getAuth();
@@ -24,8 +28,6 @@ const ResetPassword = () => {
       .catch(() => alert("Invalid user"));
   };
 
-  const onGoToMainClick = () => navigate(RoutesList.Main);
-
   useEffect(() => {
     if (email.length === 0 && emailTouched) {
       setEmailError("Email is required field");
@@ -33,10 +35,6 @@ const ResetPassword = () => {
       setEmailError("");
     }
   }, [email, emailTouched]);
-
-  const onBlurEmail = () => {
-    setEmailTouched(true);
-  };
 
   const isValid = useMemo(() => {
     return emailTouched;
@@ -62,21 +60,12 @@ const ResetPassword = () => {
           errorText={emailError}
           onBlur={onBlurEmail}
         />
-        {isVisible ? (
-          <Button
-            title={"go to home"}
-            disabled={!isValid}
-            onClick={onGoToMainClick}
-            type={ButtonType.Primary}
-          />
-        ) : (
-          <Button
-            title={"reset"}
-            disabled={!isValid}
-            onClick={onResetClick(email)}
-            type={ButtonType.Primary}
-          />
-        )}
+        <Button
+          title={isVisible ? "go to home" : "reset"}
+          disabled={!isValid}
+          onClick={isVisible ? onGoToMainClick : onResetClick(email)}
+          type={ButtonType.Primary}
+        />
       </div>
     </AuthContainer>
   );

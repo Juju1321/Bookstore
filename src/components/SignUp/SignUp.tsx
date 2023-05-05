@@ -1,27 +1,30 @@
 import React, { useState, useEffect, useMemo } from "react";
-import styles from "src/components/SignUp/SignUp.module.scss";
-import Input from "src/components/Input";
-import Button from "src/components/Button";
-import { ButtonType } from "src/utils/@globalTypes";
 import { useDispatch } from "react-redux";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { setUser } from "src/redux/reducers/userSlice";
 import { useNavigate } from "react-router-dom";
+
+import Input from "src/components/Input";
+import Button from "src/components/Button";
 import { RoutesList } from "src/pages/Router";
+import { setUser } from "src/redux/reducers/userSlice";
+import { ButtonType } from "src/utils/@globalTypes";
+import styles from "src/components/SignUp/SignUp.module.scss";
 
 const SignUp = () => {
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-
   const [nameTouched, setNameTouched] = useState(false);
   const [passwordTouched, setPasswordTouched] = useState(false);
   const [emailTouched, setEmailTouched] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (name.length === 0 && nameTouched) {
@@ -50,25 +53,14 @@ const SignUp = () => {
       }
     }
   }, [confirmPassword, password, passwordTouched]);
+
   const onChangeName = (value: string) => setName(value);
   const onChangeEmail = (value: string) => setEmail(value);
   const onChangePassword = (value: string) => setPassword(value);
   const onChangeConfirmPassword = (value: string) => setConfirmPassword(value);
-
-  const onBlurEmail = () => {
-    setEmailTouched(true);
-  };
-
-  const onBlurPassword = () => {
-    setPasswordTouched(true);
-  };
-
-  const onBlurName = () => {
-    setNameTouched(true);
-  };
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const onBlurEmail = () => setEmailTouched(true);
+  const onBlurPassword = () => setPasswordTouched(true);
+  const onBlurName = () => setNameTouched(true);
 
   const handleSignUp = (email: string, password: string) => () => {
     const auth = getAuth();

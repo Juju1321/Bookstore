@@ -1,8 +1,8 @@
 import React from "react";
-
-import styles from "./Error404NotFound.module.scss";
 import {NavLink} from "react-router-dom";
+
 import {RoutesList} from "src/pages/Router";
+import styles from "./Error404NotFound.module.scss";
 
 const Error404NotFound = () => {
         return (

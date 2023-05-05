@@ -1,4 +1,7 @@
 import React, { KeyboardEvent, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   ActiveCartIcon,
   CartIcon,
@@ -9,44 +12,33 @@ import {
 } from "src/assets/icons";
 import Input from "src/components/Input";
 import Button from "src/components/Button";
-import { ButtonType } from "src/utils/@globalTypes";
-import styles from "./Header.module.scss";
 import { RoutesList } from "src/pages/Router";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { setSearchedValue, PostSelector } from "src/redux/reducers/postSlice";
 import { FavoriteHeartIcon } from "src/assets/icons/FavoriteHeartIcon";
 import { CartSelector } from "src/redux/reducers/cartSlice";
+import { ButtonType } from "src/utils/@globalTypes";
+import styles from "./Header.module.scss";
 
 const Header = () => {
-  const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onUserClick = () => {
-    navigate(RoutesList.Account);
-  };
-
-  const onCartClick = () => {
-    navigate(RoutesList.Cart);
-  };
-
+  const [searchValue, setSearchValue] = useState("");
   const [activeButton, setActiveButton] = useState(false);
   const [activeCartButton, setActiveCartButton] = useState(false);
-  const onFavoriteClick = () => {
-    navigate(RoutesList.Favorites);
-  };
-  const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      onClickSearchButton();
-    }
-  };
 
   const favoriteList = useSelector(PostSelector.getFavoriteBook);
   const cartList = useSelector(CartSelector.getCartList);
 
-  const onHandleChange = (value: string) => {
-    setSearchValue(value);
+  const onUserClick = () => navigate(RoutesList.Account);
+  const onCartClick = () => navigate(RoutesList.Cart);
+  const onFavoriteClick = () => navigate(RoutesList.Favorites);
+  const onHandleChange = (value: string) => setSearchValue(value);
+
+  const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      onClickSearchButton();
+    }
   };
 
   const onClickSearchButton = () => {
@@ -57,11 +49,10 @@ const Header = () => {
       navigate(RoutesList.Search);
     }
   };
-
   const onLogoClick = () => {
     navigate(RoutesList.Main);
     setSearchValue("");
-    dispatch(setSearchedValue(""))
+    dispatch(setSearchedValue(""));
   };
 
   useEffect(() => {
@@ -82,7 +73,7 @@ const Header = () => {
       <div onClick={onLogoClick}>
         <LogoIcon />
       </div>
-      <div className={styles.inputWithSeaarchButton}>
+      <div className={styles.inputWithSearchButton}>
         <Input
           value={searchValue}
           onChange={onHandleChange}
@@ -96,32 +87,16 @@ const Header = () => {
         </div>
       </div>
       <div className={styles.button}>
-        {activeButton ? (
-          <Button
-            title={<FavoriteHeartIcon />}
-            onClick={onFavoriteClick}
-            type={ButtonType.WhiteIcon}
-          />
-        ) : (
-          <Button
-            title={<FillHeartIcon />}
-            onClick={onFavoriteClick}
-            type={ButtonType.WhiteIcon}
-          />
-        )}
-        {activeCartButton ? (
-          <Button
-            title={<ActiveCartIcon />}
-            onClick={onCartClick}
-            type={ButtonType.WhiteIcon}
-          />
-        ) : (
-          <Button
-            title={<CartIcon />}
-            onClick={onCartClick}
-            type={ButtonType.WhiteIcon}
-          />
-        )}
+        <Button
+          title={activeButton ? <FavoriteHeartIcon /> : <FillHeartIcon />}
+          onClick={onFavoriteClick}
+          type={ButtonType.WhiteIcon}
+        />
+        <Button
+          title={activeCartButton ? <ActiveCartIcon /> : <CartIcon />}
+          onClick={onCartClick}
+          type={ButtonType.WhiteIcon}
+        />
         <Button
           title={<UserIcon />}
           onClick={onUserClick}

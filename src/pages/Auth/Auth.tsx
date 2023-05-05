@@ -1,18 +1,19 @@
 import React, { useState } from "react";
+import classNames from "classnames";
 
 import SignIn from "src/components/SignIn/SignIn";
-import AuthContainer from "src/pages/AuthContainer";
-import styles from "./Auth.module.scss";
-import Button from "src/components/Button";
-import classNames from "classnames";
-import { ButtonType } from "src/utils/@globalTypes";
 import SignUp from "src/components/SignUp";
-import { useDispatch } from "react-redux";
+import Button from "src/components/Button";
+import AuthContainer from "src/pages/AuthContainer";
+import { ButtonType } from "src/utils/@globalTypes";
+import styles from "./Auth.module.scss";
 
 const Auth = () => {
   const [activeSignInButton, setActiveSignInButton] = useState(true);
   const [activeSignUpButton, setActiveSignUpButton] = useState(false);
+
   const isDisabled = true;
+
   const onClickSignInButton = () => {
     setActiveSignInButton(!activeSignInButton);
     setActiveSignUpButton(false);
@@ -43,7 +44,6 @@ const Auth = () => {
             className={styles.button}
           />
         )}
-
         {activeSignUpButton ? (
           <Button
             title={"sign up"}

@@ -1,26 +1,26 @@
 import React, { useState, useEffect, useMemo } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 import Input from "src/components/Input";
 import Button from "src/components/Button";
+import { RoutesList } from "src/pages/Router";
+import { setUser } from "src/redux/reducers/userSlice";
 import { ButtonType } from "src/utils/@globalTypes";
 import styles from "./SignIn.module.scss";
-import { NavLink, useNavigate } from "react-router-dom";
-import { RoutesList } from "src/pages/Router";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useDispatch } from "react-redux";
-import { setUser } from "src/redux/reducers/userSlice";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-
   const [passwordTouched, setPasswordTouched] = useState(false);
   const [emailTouched, setEmailTouched] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   useEffect(() => {
     if (email.length === 0 && emailTouched) {
       setEmailError("Email is required field");
@@ -28,6 +28,7 @@ const SignIn = () => {
       setEmailError("");
     }
   }, [email, emailTouched]);
+
   useEffect(() => {
     if (passwordTouched) {
       if (password.length === 0) {
@@ -37,16 +38,12 @@ const SignIn = () => {
       }
     }
   }, [password, passwordTouched]);
-  const onBlurEmail = () => {
-    setEmailTouched(true);
-  };
-
-  const onBlurPassword = () => {
-    setPasswordTouched(true);
-  };
 
   const onChangeEmail = (value: string) => setEmail(value);
   const onChangePassword = (value: string) => setPassword(value);
+  const onBlurEmail = () => setEmailTouched(true);
+  const onBlurPassword = () => setPasswordTouched(true);
+
   const handleSignIn = (email: string, password: string) => () => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
@@ -56,7 +53,7 @@ const SignIn = () => {
         );
         navigate(RoutesList.Main);
       })
-      .catch(() => alert("Invalid user"));
+      .catch(() => alert("Incorrect email or password"));
   };
 
   const isValid = useMemo(() => {

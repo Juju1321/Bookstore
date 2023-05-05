@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CardListType, CardType } from "src/utils/@globalTypes";
+
 import { RootState } from "src/redux/store";
+import { CardListType, CardType } from "src/utils/@globalTypes";
 import { GetSearchedPostsPayload, SetAllPostsPayload } from "./@types";
-import { clearCart } from "src/redux/reducers/cartSlice";
 
 type InitialType = {
   postsList: CardListType;

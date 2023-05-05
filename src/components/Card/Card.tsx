@@ -1,7 +1,8 @@
 import React, { FC, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import classNames from "classnames";
 
-import Button from "src/components/Button";
 import { ButtonType, CardProps, CardTypes } from "src/utils/@globalTypes";
 import {
   CancelIcon,
@@ -11,60 +12,46 @@ import {
   PlusIcon,
   StarIcon,
 } from "src/assets/icons";
-import styles from "./Card.module.scss";
-import { useNavigate } from "react-router-dom";
-import { setFavoriteBook } from "src/redux/reducers/postSlice";
+import Button from "src/components/Button";
+import { Rating } from "react-simple-star-rating";
 import {
   reduceQuantity,
   setCartList,
   removeBook,
 } from "src/redux/reducers/cartSlice";
-import { useDispatch } from "react-redux";
-import { Rating } from "react-simple-star-rating";
+import { setFavoriteBook } from "src/redux/reducers/postSlice";
+import styles from "./Card.module.scss";
 
 const Card: FC<CardProps> = ({ card, type }) => {
   const { title, subtitle, image, price, isbn13, quantity } = card;
 
   const [color, setColor] = useState("");
+  const [rating, setRating] = useState(0);
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const colors = ["#D7E4FD", "#CAEFF0", "#FEE9E2", "#F4EEFD"];
   const randomColor = colors[Math.floor(Math.random() * colors.length)];
   const randomRating = Math.floor(Math.random() * (6 - 1) + 1);
-
   const cutTitle = title.substring(0, 40).concat("...");
   const cutSubtitle = subtitle.substring(0, 90).concat("...");
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    setColor(randomColor);
-  }, []);
 
   const isSearch = type === CardTypes.Search;
   const isCart = type === CardTypes.Cart;
   const isFavorite = type === CardTypes.Favorite;
   const isDefault = type === CardTypes.Default;
 
-  const onPostClick = () => {
-    navigate(`/books/${isbn13}`);
-  };
+  useEffect(() => {
+    setColor(randomColor);
+    setRating(randomRating);
+  }, []);
 
-  const onFavoriteClick = () => {
-    dispatch(setFavoriteBook({ card }));
-  };
-
-  const onCartClick = () => {
-    dispatch(removeBook(isbn13));
-  };
-
-  const plusCount = () => {
-    dispatch(setCartList({ cartList: card }));
-  };
-
-  const minusButton = () => {
-    if (quantity && quantity > 1) dispatch(reduceQuantity(isbn13));
-  };
+  const onPostClick = () => navigate(`/books/${isbn13}`);
+  const onFavoriteClick = () => dispatch(setFavoriteBook({ card }));
+  const onRemoveBookClick = () => dispatch(removeBook(isbn13));
+  const plusCount = () => dispatch(setCartList({ cartList: card }));
+  const minusButton = () => dispatch(reduceQuantity(isbn13));
 
   return (
     <div
@@ -88,7 +75,7 @@ const Card: FC<CardProps> = ({ card, type }) => {
           onClick={onPostClick}
         >
           <img
-            alt={"image"}
+            alt={"book"}
             src={image}
             className={classNames(styles.image, {
               [styles.searchImage]: isSearch,
@@ -125,35 +112,26 @@ const Card: FC<CardProps> = ({ card, type }) => {
               <div className={classNames(styles.price, styles.cartPrice)}>
                 {price}
               </div>
-              <div>
-                <Rating
-                  readonly={true}
-                  initialValue={randomRating}
-                  emptyIcon={<StarIcon />}
-                  fillIcon={<FillStarIcon />}
-                />
-              </div>
+              <Rating
+                readonly={true}
+                initialValue={rating}
+                emptyIcon={<StarIcon />}
+                fillIcon={<FillStarIcon />}
+              />
             </div>
           )}
           {isCart && (
             <div>
               <div className={styles.countContainer}>
-                {quantity === 1 ? (
-                  <Button
-                    title={<MinusIcon />}
-                    onClick={minusButton}
-                    disabled={true}
-                    className={styles.disabledButton}
-                    type={ButtonType.WhiteIcon}
-                  />
-                ) : (
-                  <Button
-                    title={<MinusIcon />}
-                    onClick={minusButton}
-                    className={styles.button}
-                    type={ButtonType.WhiteIcon}
-                  />
-                )}
+                <Button
+                  title={<MinusIcon />}
+                  onClick={minusButton}
+                  disabled={quantity === 1}
+                  className={classNames(styles.button, {
+                    [styles.disabledButton]: quantity === 1,
+                  })}
+                  type={ButtonType.WhiteIcon}
+                />
                 <div className={styles.count}>{quantity}</div>
                 <Button
                   title={<PlusIcon />}
@@ -190,34 +168,28 @@ const Card: FC<CardProps> = ({ card, type }) => {
           </div>
         )}
         {isCart && (
-          <div>
-            <Button
-              title={<CancelIcon />}
-              onClick={onCartClick}
-              type={ButtonType.WhiteIcon}
-            />
-          </div>
+          <Button
+            title={<CancelIcon />}
+            onClick={onRemoveBookClick}
+            type={ButtonType.WhiteIcon}
+          />
         )}
         {isFavorite && (
-          <div>
-            <Button
-              title={<HeartIcon />}
-              onClick={onFavoriteClick}
-              className={styles.favoriteHearButton}
-              type={ButtonType.WhiteIcon}
-            />
-          </div>
+          <Button
+            title={<HeartIcon />}
+            onClick={onFavoriteClick}
+            className={styles.favoriteHearButton}
+            type={ButtonType.WhiteIcon}
+          />
         )}
         {type === CardTypes.Default && (
-          <div>
-            <Rating
-              readonly={true}
-              initialValue={randomRating}
-              className={styles.rating}
-              emptyIcon={<StarIcon />}
-              fillIcon={<FillStarIcon />}
-            />
-          </div>
+          <Rating
+            readonly={true}
+            initialValue={randomRating}
+            className={styles.rating}
+            emptyIcon={<StarIcon />}
+            fillIcon={<FillStarIcon />}
+          />
         )}
       </div>
     </div>

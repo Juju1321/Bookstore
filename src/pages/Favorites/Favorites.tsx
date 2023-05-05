@@ -1,23 +1,23 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import Title from "src/components/Title";
 import FavoriteCardList from "src/components/FavoriteCardList/FavoriteCardList";
-import { useDispatch, useSelector } from "react-redux";
+import Slider from "src/components/Slider";
 import { getAllPosts, PostSelector } from "src/redux/reducers/postSlice";
 import { CardTypes } from "src/utils/@globalTypes";
 import { ArrowIcon } from "src/assets/icons";
-import { useNavigate } from "react-router-dom";
 import styles from "src/pages/Account/Account.module.scss";
-import Slider from "src/components/Slider";
 
 const Favorites = () => {
-  const favoriteList = useSelector(PostSelector.getFavoriteBook);
-  const books = useSelector(PostSelector.getAllPosts);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onArrowClick = () => {
-    navigate(-1);
-  };
+  const favoriteList = useSelector(PostSelector.getFavoriteBook);
+  const booksSliderList = useSelector(PostSelector.getAllPosts);
+
+  const onArrowClick = () => navigate(-1);
 
   useEffect(() => {
     dispatch(getAllPosts());
@@ -30,7 +30,7 @@ const Favorites = () => {
       </div>
       <Title title={"Favorites"} />
       <FavoriteCardList cardList={favoriteList} type={CardTypes.Favorite} />
-        <Slider booksSlider={books} title={"Popular Books"} />
+      <Slider booksSlider={booksSliderList} title={"Popular Books"} />
     </div>
   );
 };

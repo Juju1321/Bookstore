@@ -20,7 +20,7 @@ const FavoriteCardList: FC<CardListProps> = ({ cardList, type }) => {
   ) : (
     <EmptyState
       title={"Sorry, there's no books"}
-      description={"Try to check out another category"}
+      description={"You have not added any book yet"}
     />
   );
 };

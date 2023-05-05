@@ -1,22 +1,18 @@
 import React, { FC } from "react";
 import { useSwiper } from "swiper/react";
-import styles from "./SliderButton.module.scss";
+
 import { LeftArrowIcon, RightArrowIcon } from "src/assets/icons";
+import styles from "./SliderButton.module.scss";
 
 type SliderButtonProps = {
-  title?: string;
+  title: string;
 };
 
 const SliderButton: FC<SliderButtonProps> = ({ title }) => {
   const swiper = useSwiper();
 
-  const onPrevClick = () => {
-    swiper.slidePrev();
-  };
-
-  const onNextClick = () => {
-    swiper.slideNext();
-  };
+  const onPrevClick = () => swiper.slidePrev();
+  const onNextClick = () => swiper.slideNext();
 
   return (
     <div className={styles.titleWithButton}>

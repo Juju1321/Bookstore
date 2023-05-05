@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import classNames from "classnames";
-import Title from "src/components/Title";
 import { useDispatch, useSelector } from "react-redux";
-import { PostSelector, getSearchedPosts } from "src/redux/reducers/postSlice";
-import styles from "./Search.module.scss";
+import ReactPaginate from "react-paginate";
+import classNames from "classnames";
+
+import Title from "src/components/Title";
 import SearchList from "src/components/SearchList";
 import Loader from "src/components/Loader";
-import ReactPaginate from "react-paginate";
 import EmptyState from "src/components/EmptyState";
+import { PostSelector, getSearchedPosts } from "src/redux/reducers/postSlice";
+import styles from "./Search.module.scss";
 
 const Search = () => {
   const searchValue = useSelector(PostSelector.getSearchValue);
@@ -16,6 +17,7 @@ const Search = () => {
   const isLoading = useSelector(PostSelector.getLoading);
 
   const dispatch = useDispatch();
+
   const [currentPage, setCurrentPage] = useState(1);
 
   const pagesCount = Math.ceil(postsCount / 10);
