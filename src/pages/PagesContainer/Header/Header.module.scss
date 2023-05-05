@@ -8,6 +8,10 @@
   border-bottom: 1px solid $gray;
 }
 
+.inputWithSeaarchButton {
+  position: relative;
+}
+
 .input {
   width: 542px;
 }
@@ -15,8 +19,8 @@
 .searchIcon {
   cursor: pointer;
   position: absolute;
-  top: 41px;
-  left: 831px;
+  right: 13px;
+  top: 18px;
 }
 
 .button {

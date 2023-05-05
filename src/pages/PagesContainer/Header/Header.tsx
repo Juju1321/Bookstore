@@ -1,5 +1,4 @@
 import React, { KeyboardEvent, useEffect, useState } from "react";
-
 import {
   ActiveCartIcon,
   CartIcon,
@@ -62,6 +61,7 @@ const Header = () => {
   const onLogoClick = () => {
     navigate(RoutesList.Main);
     setSearchValue("");
+    dispatch(setSearchedValue(""))
   };
 
   useEffect(() => {
@@ -82,7 +82,7 @@ const Header = () => {
       <div onClick={onLogoClick}>
         <LogoIcon />
       </div>
-      <div>
+      <div className={styles.inputWithSeaarchButton}>
         <Input
           value={searchValue}
           onChange={onHandleChange}
