@@ -6,6 +6,10 @@
   align-items: center;
   padding: 23px 0;
   border-bottom: 1px solid $gray;
+
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    width: 688px;
+  }
 }
 
 .inputWithSearchButton {
@@ -14,6 +18,11 @@
 
 .input {
   width: 542px;
+
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    width: 287px;
+    height: 56px;
+  }
 }
 
 .searchIcon {
@@ -38,4 +47,61 @@
       }
     }
   }
+}
+
+.mainMenuContainer {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(38, 34, 47, 0.5);
+}
+
+.menuContainer {
+  position: absolute;
+  background-color: $white;
+  top: 0;
+  right: 0;
+  width: 368px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 40px 40px 56px;
+}
+
+.headerMenuBurger {
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px solid $gray;
+  padding-bottom: 35px;
+  box-sizing: border-box;
+  margin-bottom: 56px;
+}
+
+.navContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 48px;
+  gap: 48px;
+}
+
+.navButton {
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 44px;
+  color: $primary;
+  &:hover {
+    color: $primary2;
+  }
+}
+
+.activeNavButton {
+  color: $primary2;
 }

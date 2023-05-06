@@ -8,6 +8,11 @@
   background-color: $white;
   gap: 72px;
   height: 100%;
+
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    width: 688px;
+    align-items: center;
+  }
 }
 
 .mainInfo {

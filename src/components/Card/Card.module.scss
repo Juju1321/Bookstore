@@ -8,6 +8,11 @@
   width: 352px;
   height: 454px;
   box-sizing: border-box;
+
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    width: 328px;
+    height: 434px;
+  }
 }
 
 .searchContainer {
@@ -30,9 +35,9 @@
   height: 240px;
 }
 
-.searchBookContainer{
- display: flex;
- gap: 16px;
+.searchBookContainer {
+  display: flex;
+  gap: 16px;
 }
 .cartBookContainer {
   display: flex;

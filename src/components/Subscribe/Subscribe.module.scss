@@ -8,6 +8,10 @@
   background-color: $purple;
   max-width: 1120px;
   box-sizing: border-box;
+
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    padding: 40px;
+  }
 }
 
 .title {
@@ -49,6 +53,9 @@
     border-radius: 2px;
     border: 1px solid $gray;
   }
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    width: 441px;
+  }
 }
 
 .button {
@@ -59,4 +66,8 @@
   line-height: 24px;
   padding: 16px 0;
   height: 56px;
+
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    width: 167px;
+  }
 }

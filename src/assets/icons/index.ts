@@ -19,3 +19,5 @@ export { CloseIconModal } from "./CloseIconModal";
 export { ArrowIcon } from "./ArrowIcon";
 export { LeftArrowIcon } from "./LeftArrowIcon";
 export { RightArrowIcon } from "./RightArrowIcon";
+export {MenuBurgerIcon} from "./MenuBurgerIcon";
+
