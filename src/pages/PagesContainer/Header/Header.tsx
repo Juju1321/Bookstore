@@ -75,6 +75,7 @@ const Header = () => {
       setIsOpened(false);
     }
   };
+
   const onLogoClick = () => {
     navigate(RoutesList.Main);
     setSearchValue("");
@@ -175,15 +176,22 @@ const Header = () => {
             type={ButtonType.WhiteIcon}
           />
         )}
+        {isMobile && (
+          <Button
+            title={isOpened ? <CancelIcon/> : <MenuBurgerIcon />}
+            onClick={onBurgerClick}
+            type={ButtonType.WhiteIcon}
+          />
+        )}
         {isOpened && (
-          <div className={styles.mainMenuContainer}>
+          <div className={classNames({[styles.mainMenuContainer] : isTablet})}>
             <div className={styles.menuContainer}>
               <div className={styles.actionsContainer}>
-                <div className={styles.headerMenuBurger}>
+                {isTablet && <div className={styles.headerMenuBurger}>
                   <div onClick={onBurgerClick}>
                     <CancelIcon />
                   </div>
-                </div>
+                </div>}
                 <div className={styles.inputWithSearchButton}>
                   <Input
                     value={searchValue}

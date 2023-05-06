@@ -13,6 +13,10 @@
     width: 688px;
     align-items: center;
   }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    width: 272px;
+    align-items: center;
+  }
 }
 
 .mainInfo {
@@ -30,5 +34,12 @@
   margin-top: 72px;
   div {
     color: $secondary;
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    margin-top: 56px;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
   }
 }
