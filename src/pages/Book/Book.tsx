@@ -120,8 +120,7 @@ const Book = () => {
                   alt={"book"}
                   className={styles.image}
                 />
-              </div>
-              <Button
+                <Button
                 title={<FillHeartIcon />}
                 onClick={onFavoriteClick}
                 type={ButtonType.PrimaryIcon}
@@ -129,6 +128,8 @@ const Book = () => {
                   [styles.activeHeartButton]: favoriteIndex !== -1,
                 })}
               />
+              </div>
+              
             </div>
             <div className={styles.infoBook}>
               <div className={styles.priceRatingContainer}>
