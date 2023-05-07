@@ -20,4 +20,5 @@ export { ArrowIcon } from "./ArrowIcon";
 export { LeftArrowIcon } from "./LeftArrowIcon";
 export { RightArrowIcon } from "./RightArrowIcon";
 export {MenuBurgerIcon} from "./MenuBurgerIcon";
+export { CheckIcon } from "./CheckIcon";
 

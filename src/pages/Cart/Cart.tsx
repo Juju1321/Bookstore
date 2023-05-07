@@ -5,13 +5,24 @@ import { useDispatch, useSelector } from "react-redux";
 import Title from "src/components/Title";
 import FavoriteCardList from "src/components/FavoriteCardList/FavoriteCardList";
 import Button from "src/components/Button";
-import { ArrowIcon } from "src/assets/icons";
+import { ArrowIcon, CheckIcon } from "src/assets/icons";
 import { ButtonType, CardTypes } from "src/utils/@globalTypes";
 import { CartSelector, clearCart } from "src/redux/reducers/cartSlice";
+import {
+  getAllPosts,
+  getChosenPost,
+  PostSelector,
+  setFavoriteBook,
+  setModalVisibility,
+  setPreviewBook,
+} from "src/redux/reducers/postSlice";
 import styles from "./Cart.module.scss";
+import Modal from "src/components/Modal/Modal";
+import { RoutesList } from "../Router";
 
 const Cart = () => {
   const cartList = useSelector(CartSelector.getCartList);
+  const isVisible = useSelector(PostSelector.getModalVisibility);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,7 +36,18 @@ const Cart = () => {
   const vat = price * 0.2;
 
   const onArrowClick = () => navigate(-1);
-  const onClickCheckOut = () => dispatch(clearCart());
+  const onClickCheckOut = () => {
+    dispatch(clearCart());
+    dispatch(setModalVisibility(true));
+  };
+  const onCloseModal = () => {
+    dispatch(setModalVisibility(false));
+    dispatch(setPreviewBook(null));
+  };
+  const onGotoHomeClick = () => {
+    navigate(RoutesList.Main);
+    dispatch(setModalVisibility(false));
+  }
 
   return (
     <div>
@@ -58,6 +80,15 @@ const Cart = () => {
             disabled={!(cartList.length > 0)}
             type={ButtonType.Primary}
           />
+          <Modal isVisible={isVisible} onClose={onCloseModal}>
+              <div className={styles.modalContainer}>
+                <div className={styles.checkIcon}>
+                  <CheckIcon />
+                  </div>
+                <div className={styles.modalText}>Your order has been completed successfully</div>
+                <Button title={"continue shopping"} onClick={onGotoHomeClick} type={ButtonType.Primary} className={styles.infoContainer}/>
+              </div>
+          </Modal>
         </div>
       </div>
     </div>
