@@ -95,6 +95,12 @@ const Card: FC<CardProps> = ({ card, type }) => {
             type={ButtonType.PrimaryIcon}
             className={styles.cancelMobileButton}
           />}
+          {isMobile && isFavorite && <Button
+            title={<HeartIcon />}
+            onClick={onFavoriteClick}
+            className={styles.favoriteHearButton}
+            type={ButtonType.PrimaryIcon}
+          />}
         </div>
         <div
           className={classNames(styles.infoContainer, {
@@ -194,7 +200,7 @@ const Card: FC<CardProps> = ({ card, type }) => {
             type={ButtonType.WhiteIcon}
           />
         )}
-        {isFavorite && (
+        {isFavorite && !isMobile && (
           <Button
             title={<HeartIcon />}
             onClick={onFavoriteClick}
