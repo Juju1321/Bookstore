@@ -1,8 +1,8 @@
 {
-  "name": "bookstoree",
+  "name": "bookstore",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://juju1321.github.io/bookstore/",
+  "homepage": "https://juju1321.github.io/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.14.1",
