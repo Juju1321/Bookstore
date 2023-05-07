@@ -13,6 +13,7 @@ type SubscribeProps = {
 const Subscribe: FC<SubscribeProps> = ({ title, description }) => {
   const [email, setEmail] = useState("");
   const onChange = (value: string) => setEmail(value);
+  const onSubscribeClick = () => setEmail("");
 
   return (
     <div className={styles.container}>
@@ -29,7 +30,7 @@ const Subscribe: FC<SubscribeProps> = ({ title, description }) => {
         <Button
           className={styles.button}
           title={"Subscribe"}
-          onClick={() => {}}
+          onClick={onSubscribeClick}
           type={ButtonType.Primary}
         />
       </div>
