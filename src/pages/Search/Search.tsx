@@ -42,7 +42,7 @@ const Search = () => {
   };
 
   const onHandleChange = (value: string) => setSearchValue(value);
-  const onCancelInput = () => navigate(RoutesList.Main)
+  const onCancelInput = () => navigate(RoutesList.Main);
 
 
   return searchList.length > 0 ? (

@@ -20,7 +20,7 @@ import {
   setCartList,
   removeBook,
 } from "src/redux/reducers/cartSlice";
-import { setFavoriteBook } from "src/redux/reducers/postSlice";
+import { setFavoriteBook, getChosenPost } from "src/redux/reducers/postSlice";
 import styles from "./Card.module.scss";
 
 const Card: FC<CardProps> = ({ card, type }) => {
@@ -39,10 +39,10 @@ const Card: FC<CardProps> = ({ card, type }) => {
   const colors = ["#D7E4FD", "#CAEFF0", "#FEE9E2", "#F4EEFD"];
   const randomColor = colors[Math.floor(Math.random() * colors.length)];
   const randomRating = Math.floor(Math.random() * (6 - 1) + 1);
-  const cutTitle = title.substring(0, 40).concat("...");
-  const titleBook = title.length < 39 ? title : cutTitle;
-  const cutMobileTitle = title.substring(0, 30).concat("...");
-  const titleMobile = title.length < 29 ? title : cutMobileTitle;
+  const cutTitle = title.substring(0, 35).concat("...");
+  const titleBook = title.length < 34 ? title : cutTitle;
+  const cutMobileTitle = title.substring(0, 20).concat("...");
+  const titleMobile = title.length < 19 ? title : cutMobileTitle;
   const cutSubtitle = subtitle.substring(0, 90).concat("...");
 
   const isSearch = type === CardTypes.Search;
@@ -55,7 +55,10 @@ const Card: FC<CardProps> = ({ card, type }) => {
     setRating(randomRating);
   }, []);
 
-  const onPostClick = () => navigate(`/books/${isbn13}`);
+  const onPostClick = () => {
+    dispatch(getChosenPost(isbn13));
+    navigate(`/books/${isbn13}`);
+  };
   const onFavoriteClick = () => dispatch(setFavoriteBook({ card }));
   const onRemoveBookClick = () => dispatch(removeBook(isbn13));
   const plusCount = () => dispatch(setCartList({ cartList: card }));

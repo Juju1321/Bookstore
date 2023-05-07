@@ -21,6 +21,7 @@ import {
   setSearchedValue,
   PostSelector,
   clearFavorites,
+  setChosenPost,
 } from "src/redux/reducers/postSlice";
 import { FavoriteHeartIcon } from "src/assets/icons/FavoriteHeartIcon";
 import { CartSelector, clearCart } from "src/redux/reducers/cartSlice";
@@ -80,6 +81,7 @@ const Header = () => {
     navigate(RoutesList.Main);
     setSearchValue("");
     dispatch(setSearchedValue(""));
+    dispatch(setChosenPost(null));
   };
 
   const onBurgerClick = () => {
