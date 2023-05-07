@@ -92,6 +92,7 @@ const Header = () => {
     dispatch(clearCart());
     dispatch(clearFavorites());
     navigate(RoutesList.Main);
+    setIsOpened(false);
   };
 
   useEffect(() => {
