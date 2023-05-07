@@ -2,6 +2,9 @@
 
 .container {
   margin: 72px 0;
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    margin: 72px 0 0;
+  }
 }
 
 .sliderContainer {
