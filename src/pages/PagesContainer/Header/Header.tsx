@@ -132,7 +132,7 @@ const Header = () => {
 
   return (
     <div className={styles.container}>
-      <div onClick={onLogoClick}>
+      <div className={styles.logo} onClick={onLogoClick}>
         <LogoIcon />
       </div>
       {!isTablet && !isMobile && (
