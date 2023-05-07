@@ -41,7 +41,7 @@ const Account = () => {
   };
 
   return (
-    <div>
+    <div className={styles.containerAccount}>
       <div className={styles.arrow} onClick={onArrowClick}>
         <ArrowIcon />
       </div>
