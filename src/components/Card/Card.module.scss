@@ -1,0 +1,292 @@
+@import "src/assets/colors";
+@import "src/assets/mixins";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 352px;
+  height: 454px;
+  box-sizing: border-box;
+
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    width: 328px;
+    height: 454px;
+  }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    width: 272px;
+    height: 405px;
+  }
+}
+
+.searchContainer {
+  display: flex;
+  padding: 20px 20px;
+  gap: 16px;
+  width: 542px;
+  height: 99px;
+  border-bottom: 1px solid $gray;
+}
+
+.cartContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 48px;
+  border-bottom: 1px solid $gray;
+  width: 1120px;
+  height: 240px;
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    width: 688px;
+    height: 230px;
+    align-items: flex-start;
+  }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    width: 272px;
+    height: 436px;
+    flex-direction: column;
+  }
+}
+
+.searchBookContainer {
+  display: flex;
+  gap: 16px;
+}
+
+.cartBookContainer {
+  display: flex;
+  gap: 32px;
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+.imageContainer {
+  height: 264px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    height:203px;
+  }
+}
+
+.searchImageContainer {
+  height: 60px;
+  width: 80px;
+}
+
+.cartImageContainer {
+  height: 192px;
+  width: 256px;
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    height: 156px;
+    width: 208px;
+  }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    height:203px;
+    width: 272px;
+  }
+}
+
+.image {
+  width: 226px;
+  height: 264px;
+  &:hover {
+    cursor: pointer;
+    width: 236px;
+    height: 274px;
+    transition: all 0.3s ease;
+  }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    width: 174px;
+    height:203px;
+  }
+}
+
+.searchImage {
+  width: 51px;
+  height: 60px;
+  &:hover {
+    cursor: pointer;
+    width: 53px;
+    height: 62px;
+    transition: all 0.3s ease;
+  }
+}
+
+.cartImage {
+  width: 164px;
+  height: 192px;
+  &:hover {
+    cursor: pointer;
+    width: 174px;
+    height: 202px;
+    transition: all 0.3s ease;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    height: 156px;
+    width: 133px;
+  }
+}
+
+.title {
+  @include tertiaryHeadline();
+  text-transform: uppercase;
+  margin-top: 21px;
+  margin-bottom: 8px;
+  height: 64px;
+  &:hover {
+    cursor: pointer;
+    color: $primary2;
+    transition: all 0.3s ease;
+  }
+}
+
+.searchInfoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cartInfoContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchTitle {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 32px;
+  margin-top: 14px;
+}
+
+.cartTitle {
+  margin-top: 24px;
+  margin-bottom: 8px;
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    margin-top: 15px;
+    margin-bottom: 0;
+  }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.subtitle {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: $secondary;
+  margin-bottom: 16px;
+  height: 48px;
+}
+
+.cartSubtitle {
+  margin-bottom: 0;
+}
+
+.footerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  @include tertiaryHeadline();
+}
+
+.cartPrice {
+  margin-right: 113px;
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    margin-right: 0;
+  }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    margin-right: 0;
+  }
+}
+
+.favoriteHearButton {
+  svg > path {
+    stroke: $red;
+    fill: $red;
+  }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.countPriceContainer {
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.countContainer {
+  display: flex;
+  align-items: center;
+}
+
+.disabledButton {
+  svg > rect {
+    fill: $secondary;
+  }
+}
+
+.count {
+  @include tertiaryHeadline();
+  color: $primary;
+  padding: 0 23px;
+}
+
+.button {
+  &:hover svg > path {
+    fill: $primary2;
+  }
+  &:hover svg > rect {
+    fill: $primary2;
+  }
+}
+
+.ratingPriceContainer {
+  width: 320px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    width: 272px;
+    margin-top: 24px;
+  }
+}
+
+.imageCancelContainer {
+  position: relative;
+}
+
+.cancelMobileButton {
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    svg > path {
+      fill: $white;
+      &:hover {
+        fill: $red;
+      }
+    }
+  }
+}

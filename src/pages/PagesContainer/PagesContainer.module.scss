@@ -1,0 +1,47 @@
+@import "src/assets/colors";
+
+.container {
+  width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  gap: 72px;
+  height: 100%;
+
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    width: 688px;
+  }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    width: 272px;
+  }
+}
+
+.mainInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.footer {
+  padding: 36px 0;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid $gray;
+  margin-top: 72px;
+  div {
+    color: $secondary;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    margin-top: 0;
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    margin-top: 56px;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+}

@@ -1,0 +1,25 @@
+@import "src/assets/colors";
+
+.mainBlockContainer {
+  padding: 0 32px 40px;
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    padding: 0;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+}
+
+.button {
+  width: 50%;
+  border-bottom: 2px solid $gray;
+  &:hover {
+    border-bottom: 2px solid $primary;
+  }
+}
+
+.activeButton {
+  border-bottom: 2px solid $primary;
+  color: $primary;
+}

@@ -1,0 +1,201 @@
+@import "src/assets/colors";
+@import "src/assets/mixins";
+
+
+.arrow {
+  margin-bottom: 37px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.title {
+  margin-bottom: 48px;
+}
+
+.imagePriceContainer {
+  display: flex;
+  justify-content: space-between;
+  // position: relative;
+  margin-bottom: 72px;
+
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    flex-direction: column;
+  }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    flex-direction: column;
+  }
+}
+
+.imageContainer {
+  width: 544px;
+  height: 472px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+   width: 100%;
+   margin-bottom: 48px;
+  }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    width: 100%;
+    height: 272px;
+    margin-bottom: 36px;
+  }
+}
+
+.image {
+  width: 300px;
+  height: 350px;
+   @media screen and (min-width: 320px) and (max-width: 767px) {
+    width: 150px;
+    height: 175px;
+   }
+}
+
+.heartButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  svg > path {
+    stroke: $white;
+  }
+}
+
+.activeHeartButton {
+  svg > path {
+    stroke: $red;
+  }
+  &:hover {
+    svg > path {
+      stroke: $red;
+    }
+  }
+}
+
+.infoBook {
+  width: 448px;
+  border-top: 1px solid $gray;
+  padding-top: 40px;
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    width: 100%;
+   }
+   @media screen and (min-width: 320px) and (max-width: 767px) {
+     width: 100%;
+   }
+}
+
+.priceRatingContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  @include secondaryHeadline();
+}
+
+.bookInfoContainer {
+  margin-top: 24px;
+  margin-bottom: 89px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bookInfo {
+  display: flex;
+  justify-content: space-between;
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    flex-direction: column;
+  }
+}
+
+.nameInfo {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  color: $secondary;
+}
+
+.info {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  text-align: right;
+  color: $primary;
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    text-align: left;
+  }
+}
+
+.description {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  color: $primary;
+  margin: 50px 0;
+}
+
+.socialContainer {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 72px;
+}
+
+.socialIcon {
+  &:hover {
+    cursor: pointer;
+    svg > path {
+      stroke: $primary2;
+    }
+  }
+}
+
+.preview {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: $primary;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.pagePreviewContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.pagePreview {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: $primary2;
+  cursor: pointer;
+  &:hover {
+    color: $primary;
+  }
+}
+
+.allPagePreview {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: $primary2;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

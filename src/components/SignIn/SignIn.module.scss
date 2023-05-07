@@ -1,0 +1,30 @@
+@import "src/assets/colors";
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 32px;
+}
+.input {
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    width: 100%;
+  }
+}
+.forgotPass {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 32px;
+  color: $primary;
+  margin-bottom: 40px;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 8px;
+  &:hover {
+    color: $primary2;
+  }
+}

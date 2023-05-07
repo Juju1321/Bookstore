@@ -1,0 +1,53 @@
+@import "src/assets/colors";
+
+@mixin button {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  box-sizing: border-box;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@mixin buttonWithIcon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@mixin primaryHeadline {
+  color: $primary;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 64px;
+  text-transform: uppercase;
+}
+
+@mixin secondaryHeadline {
+  color: $primary;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 60px;
+}
+
+@mixin tertiaryHeadline {
+  color: $primary;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+}

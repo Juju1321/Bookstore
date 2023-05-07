@@ -1,0 +1,11 @@
+@import "src/assets/colors";
+@import "src/assets/mixins";
+
+.title {
+  @include primaryHeadline();
+
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    font-size: 32px;
+    line-height: 44px;
+  }
+}
