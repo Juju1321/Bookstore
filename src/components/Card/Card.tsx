@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 import classNames from "classnames";
 
 import { ButtonType, CardProps, CardTypes } from "src/utils/@globalTypes";
@@ -27,6 +28,10 @@ const Card: FC<CardProps> = ({ card, type }) => {
 
   const [color, setColor] = useState("");
   const [rating, setRating] = useState(0);
+
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1149 });
+  const isMobile = useMediaQuery({ minWidth: 320, maxWidth: 767 });
+  const isLaptop = useMediaQuery({ minWidth: 1150 })
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -66,6 +71,7 @@ const Card: FC<CardProps> = ({ card, type }) => {
           [styles.searchBookContainer]: isSearch,
         })}
       >
+        <div className={styles.imageCancelContainer}>
         <div
           style={{ backgroundColor: color }}
           className={classNames(styles.imageContainer, {
@@ -82,6 +88,13 @@ const Card: FC<CardProps> = ({ card, type }) => {
               [styles.cartImage]: isCart || isFavorite,
             })}
           />
+        </div>
+        {isMobile && isCart && <Button
+            title={<CancelIcon />}
+            onClick={onRemoveBookClick}
+            type={ButtonType.PrimaryIcon}
+            className={styles.cancelMobileButton}
+          />}
         </div>
         <div
           className={classNames(styles.infoContainer, {
@@ -121,7 +134,7 @@ const Card: FC<CardProps> = ({ card, type }) => {
             </div>
           )}
           {isCart && (
-            <div>
+            <div className={styles.countPriceContainer}>
               <div className={styles.countContainer}>
                 <Button
                   title={<MinusIcon />}
@@ -140,6 +153,13 @@ const Card: FC<CardProps> = ({ card, type }) => {
                   type={ButtonType.WhiteIcon}
                 />
               </div>
+              {!isLaptop && <div
+            className={classNames(styles.price, {
+              [styles.cartPrice]: isCart,
+            })}
+          >
+            {quantity && `$${(quantity * +price.substring(1)).toFixed(2)}`}
+          </div>}
             </div>
           )}
         </div>
@@ -149,7 +169,7 @@ const Card: FC<CardProps> = ({ card, type }) => {
           [styles.cartFooterContainer]: isCart || isFavorite,
         })}
       >
-        {isCart && (
+        {isCart && isLaptop &&  (
           <div
             className={classNames(styles.price, {
               [styles.cartPrice]: isCart,
@@ -167,7 +187,7 @@ const Card: FC<CardProps> = ({ card, type }) => {
             {price}
           </div>
         )}
-        {isCart && (
+        {isCart && !isMobile && (
           <Button
             title={<CancelIcon />}
             onClick={onRemoveBookClick}

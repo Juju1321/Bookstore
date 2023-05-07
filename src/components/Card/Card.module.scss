@@ -37,15 +37,30 @@
   border-bottom: 1px solid $gray;
   width: 1120px;
   height: 240px;
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    width: 688px;
+    height: 230px;
+    align-items: flex-start;
+  }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    width: 272px;
+    height: 436px;
+    flex-direction: column;
+  }
 }
 
 .searchBookContainer {
   display: flex;
   gap: 16px;
 }
+
 .cartBookContainer {
   display: flex;
   gap: 32px;
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    flex-direction: column;
+    gap: 20px;
+  }
 }
 
 .imageContainer {
@@ -66,6 +81,14 @@
 .cartImageContainer {
   height: 192px;
   width: 256px;
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    height: 156px;
+    width: 208px;
+  }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    height:203px;
+    width: 272px;
+  }
 }
 
 .image {
@@ -102,6 +125,10 @@
     width: 174px;
     height: 202px;
     transition: all 0.3s ease;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    height: 156px;
+    width: 133px;
   }
 }
 
@@ -140,6 +167,14 @@
 .cartTitle {
   margin-top: 24px;
   margin-bottom: 8px;
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    margin-top: 15px;
+    margin-bottom: 0;
+  }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 .subtitle {
@@ -168,12 +203,31 @@
 
 .cartPrice {
   margin-right: 113px;
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    margin-right: 0;
+  }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    margin-right: 0;
+  }
 }
 
 .favoriteHearButton {
   svg > path {
     stroke: $red;
     fill: $red;
+  }
+}
+
+.countPriceContainer {
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 
@@ -208,4 +262,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.imageCancelContainer {
+  position: relative;
+}
+
+.cancelMobileButton {
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    svg > path {
+      fill: $white;
+      &:hover {
+        fill: $red;
+      }
+    }
+  }
 }
