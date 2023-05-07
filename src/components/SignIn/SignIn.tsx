@@ -68,6 +68,7 @@ const SignIn = () => {
           value={email}
           onChange={onChangeEmail}
           placeholder={"Your email"}
+          className={styles.input}
           type={"email"}
           errorText={emailError}
           onBlur={onBlurEmail}
@@ -76,6 +77,7 @@ const SignIn = () => {
           title={"Password"}
           value={password}
           onChange={onChangePassword}
+          className={styles.input}
           placeholder={"Your password"}
           type={"password"}
           errorText={passwordError}

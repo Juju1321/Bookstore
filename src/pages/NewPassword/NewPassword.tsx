@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { getAuth, confirmPasswordReset } from "firebase/auth";
 
@@ -46,6 +46,13 @@ const NewPassword = () => {
           .catch(() => alert("Invalid password"));
     };
 
+    const isValid = useMemo(() => {
+      return (
+        passwordError.length === 0 &&
+        passwordTouched
+      );
+    }, [passwordError, passwordTouched]);
+
   return (
     <AuthContainer>
       <div className={styles.title}>new password</div>
@@ -56,6 +63,7 @@ const NewPassword = () => {
             value={password}
             onChange={onChangePassword}
             placeholder={"Your password"}
+            className={styles.input}
             type={"password"}
             errorText={passwordError}
             onBlur={onBlurPassword}
@@ -65,6 +73,7 @@ const NewPassword = () => {
             value={confirmPassword}
             onChange={onChangeConfirmPassword}
             placeholder={"Confirm your password"}
+            className={styles.input}
             type={"password"}
             errorText={passwordError}
             onBlur={onBlurPassword}
@@ -73,6 +82,7 @@ const NewPassword = () => {
         <Button
           title={"set password"}
           onClick={onNewPasswordClick(oobCode, password)}
+          disabled={!isValid}
           type={ButtonType.Primary}
         />
       </div>

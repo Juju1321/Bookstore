@@ -6,6 +6,11 @@
   display: flex;
   flex-direction: column;
   padding: 40px 32px;
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    border: none;
+    padding: 0;
+    width: 100%;
+  }
 }
 
 .infoContainer {

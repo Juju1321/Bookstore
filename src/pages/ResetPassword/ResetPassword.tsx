@@ -56,6 +56,7 @@ const ResetPassword = () => {
           value={email}
           onChange={onChangeEmail}
           placeholder={"Your email"}
+          className={styles.input}
           type={"text"}
           errorText={emailError}
           onBlur={onBlurEmail}

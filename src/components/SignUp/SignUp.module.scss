@@ -5,11 +5,18 @@
   flex-direction: column;
 }
 
+.input {
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    width: 100%;
+  }
+}
+
 .inputContainer {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-top: 32px;}
+  margin-top: 32px;
+}
 
 .button {
   margin-top: 40px;

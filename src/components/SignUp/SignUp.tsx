@@ -97,6 +97,7 @@ const SignUp = () => {
           onChange={onChangeName}
           placeholder={"Your name"}
           type={"text"}
+          className={styles.input}
           errorText={nameError}
           onBlur={onBlurName}
         />
@@ -105,6 +106,7 @@ const SignUp = () => {
           value={email}
           onChange={onChangeEmail}
           placeholder={"Your email"}
+          className={styles.input}
           type={"text"}
           errorText={emailError}
           onBlur={onBlurEmail}
@@ -113,6 +115,7 @@ const SignUp = () => {
           title={"Password"}
           value={password}
           onChange={onChangePassword}
+          className={styles.input}
           placeholder={"Your password"}
           type={"password"}
           errorText={passwordError}
@@ -123,6 +126,7 @@ const SignUp = () => {
           value={confirmPassword}
           onChange={onChangeConfirmPassword}
           placeholder={"Confirm your password"}
+          className={styles.input}
           type={"password"}
           errorText={passwordError}
           onBlur={onBlurPassword}
