@@ -5,6 +5,9 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    align-items: center;
+  }
 }
 
 .error {
@@ -12,6 +15,14 @@
   font-weight: 800;
   font-size: 275px;
   line-height: 236px;
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    font-size: 191px;
+    line-height: 164px;
+  }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    font-size: 130px;
+    line-height: 120px;
+  }
 }
 
 .text {
@@ -19,6 +30,15 @@
   font-weight: 800;
   font-size: 100px;
   line-height: 184px;
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    font-size: 77px;
+    line-height: 93px;
+    text-align: center;
+  }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    font-size: 60px;
+    line-height: 70px;
+  }
 }
 
 .btnHome {
@@ -30,5 +50,11 @@
   padding: 18px 0;
   &:hover {
     background-color: $primary2;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1149px) {
+    margin-bottom: 70px;
+  }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+   width: 100%;
   }
 }

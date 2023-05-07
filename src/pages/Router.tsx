@@ -15,15 +15,15 @@ import Account from "./Account/Account";
 import { useAuth } from "src/hooks/useAuth";
 
 export enum RoutesList {
-  Main = "bookstore/",
-  Book = "bookstore/books/:isbn13",
-  Auth = "bookstore/auth",
-  Account = "bookstore/account",
-  Reset = "bookstore/auth/reset",
-  NewPassword = "bookstore/auth/reset/new-password",
-  Favorites = "bookstore/favorites",
-  Cart = "bookstore/cart",
-  Search = "bookstore/search/:query",
+  Main = "/",
+  Book = "/books/:isbn13",
+  Auth = "/auth",
+  Account = "/account",
+  Reset = "/auth/reset",
+  NewPassword = "/auth/reset/new-password",
+  Favorites = "/favorites",
+  Cart = "/cart",
+  Search = "/search/:query",
   Default = "*",
 }
 const Router = () => {
