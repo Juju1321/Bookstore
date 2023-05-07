@@ -40,6 +40,9 @@ const Card: FC<CardProps> = ({ card, type }) => {
   const randomColor = colors[Math.floor(Math.random() * colors.length)];
   const randomRating = Math.floor(Math.random() * (6 - 1) + 1);
   const cutTitle = title.substring(0, 40).concat("...");
+  const titleBook = title.length < 39 ? title : cutTitle;
+  const cutMobileTitle = title.substring(0, 30).concat("...");
+  const titleMobile = title.length < 29 ? title : cutMobileTitle;
   const cutSubtitle = subtitle.substring(0, 90).concat("...");
 
   const isSearch = type === CardTypes.Search;
@@ -115,7 +118,7 @@ const Card: FC<CardProps> = ({ card, type }) => {
             })}
             onClick={onPostClick}
           >
-            {title.length < 39 ? title : cutTitle}
+            {isMobile ? titleMobile : titleBook}
           </div>
           {!isSearch && (
             <div

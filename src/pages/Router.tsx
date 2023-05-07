@@ -41,7 +41,7 @@ const Router = () => {
           />
           <Route
             path={RoutesList.Cart}
-            element={!isAuth ? <Cart /> : <Auth />}
+            element={isAuth ? <Cart /> : <Auth />}
           />
           <Route path={RoutesList.Search} element={<Search />} />
           <Route path={RoutesList.Auth} element={<Auth />} />
