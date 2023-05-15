@@ -30,7 +30,7 @@ const Router = () => {
   const { isAuth } = useAuth();
 
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter basename="/bookstore">
       <Routes>
         <Route path={RoutesList.Main} element={<PagesContainer />}>
           <Route path={RoutesList.Main} element={<Main />} />
