@@ -23,7 +23,7 @@ const ResetPassword = () => {
 
   const onResetClick = (email: string) => () => {
     const auth = getAuth();
-    sendPasswordResetEmail(auth, email, { url: "http://localhost:3000/auth" })
+    sendPasswordResetEmail(auth, email, { url: "https://juju1321.github.io/bookstore/auth/reset" })
       .then(() => setIsVisible(true))
       .catch(() => alert("Invalid user"));
   };
